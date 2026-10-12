@@ -386,11 +386,12 @@
 <div id="toast"></div>
 
 <script>
+// EASY STORY MODE
 const COURSE = [
     {
-        id: 1, chapter: "1. Words", name: "Big Titles",
-        speech: "Let's make a big title!",
-        desc: "<h1> makes a BIG title.\n<p> makes a normal sentence.",
+        id: 1, chapter: "1. Words", name: "Magic Blocks",
+        speech: "Let's build a webpage!",
+        desc: "You are a magic builder! The internet is blank paper.\n\n<h1> is a giant magic block for a title.\n<p> is a small block for a sentence.",
         starter: "",
         tasks: [
             { text: "Make an <h1> title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
@@ -401,7 +402,7 @@ const COURSE = [
     {
         id: 2, chapter: "1. Words", name: "Bear Sizes",
         speech: "Titles have sizes, just like bears!",
-        desc: "<h1> is BIG!\n<h2> is medium!\n<h3> is small!",
+        desc: "Bears come in sizes!\n\nPapa Bear is <h1>. He is huge!\nMama Bear is <h2>. She is medium.\nBaby Bear is <h3>. He is tiny!",
         starter: "",
         tasks: [
             { text: "Make an <h1> title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
@@ -413,7 +414,7 @@ const COURSE = [
     {
         id: 3, chapter: "1. Words", name: "Lines & Jumps",
         speech: "Let's draw a line and jump down!",
-        desc: "<hr> draws a line.\n<br> makes words jump down.",
+        desc: "Let's draw magic lines!\n\n<hr> draws a line across the page.\n<br> makes your words jump down!",
         starter: "",
         tasks: [
             { text: "Make two <p> sentences", check: (c) => (c.match(/<p>/gi) || []).length >= 2 },
@@ -425,7 +426,7 @@ const COURSE = [
     {
         id: 4, chapter: "1. Words", name: "Cool Words",
         speech: "Let's make words look super cool!",
-        desc: "<strong> makes words thick.\n<em> makes words slanted.",
+        desc: "Make your words shout!\n\n<strong> flexes its muscles and makes words thick.\n<em> leans over and makes words slanted.",
         starter: "",
         tasks: [
             { text: "Put a word inside <strong>...</strong>", check: (c) => /<strong>.+<\/strong>/is.test(c) },
@@ -436,7 +437,7 @@ const COURSE = [
     {
         id: 5, chapter: "1. Words", name: "Making Lists",
         speech: "Let's make a list!",
-        desc: "<ul> makes a list with dots.\n<ol> makes a list with numbers.\nUse <li> for the items!",
+        desc: "Let's bake a cake!\n\n<ul> makes a dot list for ingredients.\n<ol> makes a number list for steps.\nUse <li> for each thing!",
         starter: "",
         tasks: [
             { text: "Make a <ul> list with two <li> items", check: (c) => /<ul>\s*(<li>.*?<\/li>\s*){2,}<\/ul>/is.test(c) },
@@ -447,7 +448,7 @@ const COURSE = [
     {
         id: 6, chapter: "1. Words", name: "Pictures",
         speech: "Let's put a cute puppy on our page!",
-        desc: "The <img> tag shows a picture.",
+        desc: "Time to paint! The <img> tag is a magic painting.\n\nUse `src` to tell it what picture to paint.",
         starter: "",
         tasks: [
             { text: "Use an <img> tag", check: (c) => /<img\s+[^>]*>/i.test(c) },
@@ -458,7 +459,7 @@ const COURSE = [
     {
         id: 7, chapter: "1. Words", name: "Links",
         speech: "Links are like magic doors!",
-        desc: "The <a> tag makes a link you can click.",
+        desc: "Make a magic door! The <a> tag makes a shiny link.\n\nClick it to travel to a new webpage!",
         starter: "",
         tasks: [
             { text: "Use an <a> tag", check: (c) => /<a\s+[^>]*>.+<\/a>/is.test(c) },
@@ -469,7 +470,7 @@ const COURSE = [
     {
         id: 8, chapter: "2. Boxes", name: "The House",
         speech: "A webpage is built like a house!",
-        desc: "<html> is the whole house.\n<body> is the room where we see things.",
+        desc: "Webpages are like houses!\n\n<html> is the walls.\n<head> is the brain.\n<body> is the living room where we play!",
         starter: "",
         tasks: [
             { text: "Make an <html> box", check: (c) => /<html>[\s\S]*<\/html>/i.test(c) },
@@ -480,7 +481,7 @@ const COURSE = [
     {
         id: 9, chapter: "2. Boxes", name: "Toys in Boxes",
         speech: "Put tags inside other tags!",
-        desc: "Just like putting a toy in a box.",
+        desc: "Tags can hide inside other tags!\n\nIt is like putting a tiny toy inside a big toy box.",
         starter: "",
         tasks: [
             { text: "Put a <strong> inside a <p>", check: (c) => /<p>.*<strong>.*<\/strong>.*<\/p>/is.test(c) },
@@ -491,7 +492,7 @@ const COURSE = [
     {
         id: 10, chapter: "2. Boxes", name: "The Group Box",
         speech: "The <div> tag groups things together!",
-        desc: "Use <div> to put things in an invisible box.",
+        desc: "The <div> tag is an invisible cardboard box!\n\nPut toys inside it so they don't get lost.",
         starter: "",
         tasks: [
             { text: "Make a <div> box", check: (c) => /<div>[\s\S]*<\/div>/i.test(c) },
@@ -503,7 +504,7 @@ const COURSE = [
     {
         id: 11, chapter: "2. Boxes", name: "Tiny Wrapper",
         speech: "A <span> is a tiny wrapper for one word!",
-        desc: "Wrap one word in a <span> to color it.",
+        desc: "A <span> is a tiny wrapper!\n\nIt wraps around just one word so you can paint it a new color.",
         starter: "",
         tasks: [
             { text: "Put a <span> around a word", check: (c) => /<p>.*<span>.+<\/span>.*<\/p>/is.test(c) },
@@ -514,7 +515,7 @@ const COURSE = [
     {
         id: 12, chapter: "2. Boxes", name: "Team Shirts",
         speech: "Classes are like team shirts!",
-        desc: "Give tags the same class name.",
+        desc: "Classes are like sports shirts!\n\nPut the same class on lots of tags to make them match.",
         starter: "",
         tasks: [
             { text: 'Give the first <p> class="blue"', check: (c) => /<p\s+[^>]*class=["']blue["']/i.test(c) },
@@ -525,7 +526,7 @@ const COURSE = [
     {
         id: 13, chapter: "2. Boxes", name: "Secret Names",
         speech: "An ID is a secret name for just one tag!",
-        desc: "Give a special tag its very own ID.",
+        desc: "An ID is a secret superhero name!\n\nOnly ONE tag can wear it.",
         starter: "",
         tasks: [
             { text: 'Make a div with id="red"', check: (c) => /<div\s+[^>]*id=["']red["']/i.test(c) },
@@ -536,7 +537,7 @@ const COURSE = [
     {
         id: 14, chapter: "2. Boxes", name: "Grids",
         speech: "Tables make a neat grid!",
-        desc: "<table> is the grid.\n<tr> is a row.\n<td> is a box for words.",
+        desc: "Tables make a neat grid of boxes!\n\n<table> is the grid. <tr> is a row. <td> is a little cubby for toys.",
         starter: "",
         tasks: [
             { text: "Make a <table>", check: (c) => /<table>[\s\S]*<\/table>/i.test(c) },
@@ -548,7 +549,7 @@ const COURSE = [
     {
         id: 15, chapter: "3. Forms", name: "Typing Boxes",
         speech: "Let people type on your page!",
-        desc: "<form> holds questions.\n<input> is a blank box to type in.",
+        desc: "Let friends talk to you!\n\n<form> makes a mailbox. <input> makes a blank box to type in.",
         starter: "",
         tasks: [
             { text: "Make a <form>", check: (c) => /<form>[\s\S]*<\/form>/i.test(c) },
@@ -559,7 +560,7 @@ const COURSE = [
     {
         id: 16, chapter: "3. Forms", name: "Name Tags",
         speech: "Labels tell us what to type!",
-        desc: "A <label> is a sticky note for the box.",
+        desc: "Boxes need sticky notes!\n\nA <label> tells your friends what to type in the box.",
         starter: "",
         tasks: [
             { text: "Add an <input>", check: (c) => /<input/i.test(c) },
@@ -570,7 +571,7 @@ const COURSE = [
     {
         id: 17, chapter: "3. Forms", name: "Pick a Toy",
         speech: "Radio buttons let you pick just one!",
-        desc: "Use radio buttons to choose one thing.",
+        desc: "Time to choose!\n\nCheckboxes let you pick lots of toys. Radio buttons mean you can only pick ONE!",
         starter: "",
         tasks: [
             { text: "Add a checkbox", check: (c) => /type=["']checkbox["']/i.test(c) },
@@ -581,7 +582,7 @@ const COURSE = [
     {
         id: 18, chapter: "3. Forms", name: "Hidden List",
         speech: "A dropdown hides a long list!",
-        desc: "<select> makes a drawer.\n<option> are the things inside!",
+        desc: "Hide a big list!\n\n<select> makes a magic drawer. <option> are the folded papers inside.",
         starter: "",
         tasks: [
             { text: "Make a <select>", check: (c) => /<select>[\s\S]*<\/select>/i.test(c) },
@@ -592,7 +593,7 @@ const COURSE = [
     {
         id: 19, chapter: "3. Forms", name: "Big Box",
         speech: "Write a long story!",
-        desc: "A <textarea> is a giant box to write a letter.",
+        desc: "Write a huge letter!\n\nA <textarea> is a giant stretchy box for a whole story.",
         starter: "",
         tasks: [
             { text: "Add a <textarea>", check: (c) => /<textarea[\s\S]*<\/textarea>/i.test(c) }
@@ -602,7 +603,7 @@ const COURSE = [
     {
         id: 20, chapter: "3. Forms", name: "Send It!",
         speech: "Add a button to send the answers!",
-        desc: "A <button> sends your answers away.",
+        desc: "Send your letter!\n\nA <button> shoots your answers across the internet like a flying owl.",
         starter: "",
         tasks: [
             { text: "Add an <input>", check: (c) => /<input/i.test(c) },
@@ -613,7 +614,7 @@ const COURSE = [
     {
         id: 21, chapter: "4. Pages", name: "The Sandwich",
         speech: "Let's build a website sandwich!",
-        desc: "<header> is the top bun.\n<main> is the middle.\n<footer> is the bottom bun.",
+        desc: "Build a sandwich!\n\n<header> is the top bread. <main> is the meat. <footer> is the bottom bread.",
         starter: "",
         tasks: [
             { text: "Add a <header>", check: (c) => /<header>[\s\S]*<\/header>/is.test(c) },
@@ -625,7 +626,7 @@ const COURSE = [
     {
         id: 22, chapter: "4. Pages", name: "The Map",
         speech: "A nav bar is a map for your website!",
-        desc: "<nav> holds links so visitors do not get lost.",
+        desc: "Draw a map!\n\nA <nav> holds magic door links so visitors never get lost.",
         starter: "",
         tasks: [
             { text: "Put a <nav> inside the header", check: (c) => /<header>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
@@ -636,7 +637,7 @@ const COURSE = [
     {
         id: 23, chapter: "4. Pages", name: "Rooms",
         speech: "Sections are like rooms in a house!",
-        desc: "Use <section> to divide a page into rooms.",
+        desc: "Build rooms!\n\nUse <section> to divide your big house into neat little rooms.",
         starter: "",
         tasks: [
             { text: "Make two <section> tags", check: (c) => (c.match(/<section>/gi) || []).length >= 2 },
@@ -647,7 +648,7 @@ const COURSE = [
     {
         id: 24, chapter: "4. Pages", name: "A Story",
         speech: "Articles are full stories!",
-        desc: "An <article> is a story that makes sense by itself.",
+        desc: "Write a book!\n\nAn <article> is a complete story that makes sense all by itself.",
         starter: "",
         tasks: [
             { text: "Add an <article>", check: (c) => /<article>[\s\S]*<\/article>/is.test(c) }
@@ -657,7 +658,7 @@ const COURSE = [
     {
         id: 25, chapter: "4. Pages", name: "Photo Frame",
         speech: "Put your pictures in a nice frame!",
-        desc: "<figure> is a frame for your picture.",
+        desc: "Hang a painting!\n\n<figure> is a golden frame for your picture.",
         starter: "",
         tasks: [
             { text: "Make a <figure>", check: (c) => /<figure>[\s\S]*<\/figure>/is.test(c) },
@@ -668,7 +669,7 @@ const COURSE = [
     {
         id: 26, chapter: "4. Pages", name: "Masterpiece",
         speech: "You are a Master Builder!",
-        desc: "Afifa, put everything together! Use a header, a main body, and a footer.",
+        desc: "You are the Master Builder!\n\nPut the header, main, and footer together to build your final masterpiece!",
         starter: "",
         tasks: [
             { text: "Include a <header>", check: (c) => /<header>[\s\S]*<\/header>/is.test(c) },
@@ -682,14 +683,14 @@ const COURSE = [
 let state = { currentIndex: 0, unlockedIndex: 0, userCode: {}, xp: 0 };
 
 function initStorage() {
-    const saved = localStorage.getItem('afifa_quest_v5');
+    const saved = localStorage.getItem('afifa_quest_v6');
     if (saved) {
         try { state = JSON.parse(saved); } catch (e) {}
     }
 }
 
 function persistState() {
-    localStorage.setItem('afifa_quest_v5', JSON.stringify(state));
+    localStorage.setItem('afifa_quest_v6', JSON.stringify(state));
 }
 
 const chapterListEl = document.getElementById('chapter-list');
