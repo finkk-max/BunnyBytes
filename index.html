@@ -286,6 +286,7 @@
         .mission-desc {
             margin-bottom: 14px;
             color: #455a64;
+            white-space: pre-wrap;
         }
 
         .tasks-box {
@@ -611,21 +612,14 @@
 <div id="toast"></div>
 
 <script>
-/**
- * 26 Complete Exercises mapping directly to Codédex HTML Curriculum:
- * Ch 1: Elements (Ex 1 to 7)
- * Ch 2: Structure (Ex 8 to 14)
- * Ch 3: Forms (Ex 15 to 20)
- * Ch 4: Semantic HTML (Ex 21 to 26)
- */
 const COURSE = [
     // CHAPTER 1: ELEMENTS
     {
         id: 1,
         chapter: "1. Elements",
-        name: "Shooting Star",
-        speech: "Welcome to coding, Afifa! A webpage needs an <h1> title and a <p> sentence. Let's make a wish upon a star!",
-        desc: "Build a stargazing webpage. You need to write a big heading and a descriptive paragraph under it.",
+        name: "The Magic Building Blocks",
+        speech: "Welcome to the magical world of coding, Afifa! Every website you visit is built using secret magic blocks called HTML.",
+        desc: "Imagine the internet is a giant, blank piece of paper. To put pictures, words, and games on it, we use HTML tags. Think of tags like digital Lego bricks! When you type a tag, the computer reads it and builds exactly what you ask for.\n\nToday, you are the Master Builder! Let's build your very first webpage by snapping together a giant title block (<h1>) and a little story block (<p>).",
         starter: "<!-- Type your heading and paragraph below -->\n",
         tasks: [
             { text: "Add an <h1> heading that contains text", check: (c) => /<h1>.+<\/h1>/is.test(c) },
@@ -636,9 +630,9 @@ const COURSE = [
     {
         id: 2,
         chapter: "1. Elements",
-        name: "Elemental",
-        speech: "Headings come in different sizes, from h1 (biggest) down to h3! Can you order them properly?",
-        desc: "Webpages use heading ranks for structure. Create three headings: an <h1> for the main title, an <h2> for a subtitle, and an <h3> for a small section note.",
+        name: "The Three Bears of Text",
+        speech: "Headings are like the Three Bears! Papa Bear is <h1> (the biggest), Mama Bear is <h2>, and Baby Bear is <h3>.",
+        desc: "If every word on a webpage was the exact same size, reading it would be super boring! Headings help us shout out the most important topics.\n\nThe <h1> is the giant book title. The <h2> is a chapter title. The <h3> is a tiny note. Can you organize our ocean story using all three sizes?",
         starter: "<h1>The Ocean World</h1>\n",
         tasks: [
             { text: "Keep the <h1> heading for the main title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
@@ -650,9 +644,9 @@ const COURSE = [
     {
         id: 3,
         chapter: "1. Elements",
-        name: "Newspaper",
-        speech: "Newspapers use paragraphs and dividing lines! Let's format our first breaking news article.",
-        desc: "Write two distinct paragraphs (<p>), and separate them cleanly with a horizontal divider line (<hr>) and insert a line break (<br>) inside the first paragraph.",
+        name: "The Magic Line & The Big Jump",
+        speech: "Sometimes words get too crowded! Let's use <hr> to draw a magic line, and <br> to make our words jump to a new line.",
+        desc: "When you write a newspaper, you don't want the sports news to crash into the weather news! \n\nThe <hr> tag draws a solid line across the page to keep things separated. The <br> tag is like pressing 'Enter' on a keyboard—it forces the words to jump down so they don't squish together.",
         starter: "<p>Morning News edition.</p>\n",
         tasks: [
             { text: "Have at least two separate <p> paragraphs", check: (c) => (c.match(/<p>/gi) || []).length >= 2 && (c.match(/<\/p>/gi) || []).length >= 2 },
@@ -664,9 +658,9 @@ const COURSE = [
     {
         id: 4,
         chapter: "1. Elements",
-        name: "Corporate Talk",
-        speech: "We can make words stand out! Use <strong> for bold words and <em> for italic words.",
-        desc: "Create a paragraph where at least one word is wrapped in <strong> to make it bold, and at least one word is wrapped in <em> to emphasize it in italics.",
+        name: "Shouting and Whispering",
+        speech: "Let's give our words some emotion! <strong> makes words flex their muscles, and <em> makes them lean in for a whisper.",
+        desc: "When we talk, we sometimes say things REALLY LOUD or with *special feeling*. Computers don't have voices, so we have to tell them how a word sounds.\n\nWrapping a word in <strong> makes it bold and strong. Wrapping it in <em> emphasizes it by making it italic (slanted)!",
         starter: "<p>Learning code is fun and exciting!</p>\n",
         tasks: [
             { text: "Wrap a word inside <strong>...</strong>", check: (c) => /<strong>.+<\/strong>/is.test(c) },
@@ -678,9 +672,9 @@ const COURSE = [
     {
         id: 5,
         chapter: "1. Elements",
-        name: "Sous-Chef",
-        speech: "Let's bake a cake! Chefs need recipe lists. We have bullet lists (<ul>) and numbered lists (<ol>)!",
-        desc: "Create an unordered list (<ul>) with 2 ingredient items (<li>), followed by an ordered list (<ol>) with 2 cooking steps (<li>).",
+        name: "The Recipe Book",
+        speech: "Chefs need lists to bake cakes! We have dot lists (<ul>) for ingredients, and number lists (<ol>) for the steps.",
+        desc: "If a robot was baking a cake, it needs to know what order to do things in. \n\nAn <ol> (Ordered List) uses numbers like 1, 2, 3 so the robot doesn't bake the cake before mixing the flour! A <ul> (Unordered List) uses bullet dots, which is perfect for a shopping list where the order doesn't matter.",
         starter: "<h3>Baking Cupcakes</h3>\n",
         tasks: [
             { text: "Build an unordered list <ul> with at least two <li> items", check: (c) => /<ul>\s*(<li>.*?<\/li>\s*){2,}<\/ul>/is.test(c) },
@@ -691,9 +685,9 @@ const COURSE = [
     {
         id: 6,
         chapter: "1. Elements",
-        name: "Lost Pet",
-        speech: "Oh no, a puppy is wandering! We need to show a picture so everyone can recognize him.",
-        desc: "Add an image (<img>) tag with a valid 'src' link attribute and an 'alt' description attribute so screen-readers can read it.",
+        name: "Painting a Picture",
+        speech: "Words are great, but pictures are fun! The <img> tag acts like a magical painting canvas.",
+        desc: "When you put an <img> tag on a page, it's totally blank! It needs a source (`src`) to tell it exactly which photo to fetch from the internet.\n\nWe also add an `alt` description. This is super important because if a blind person visits your website, their computer will read the `alt` text out loud so they can imagine the picture!",
         starter: "<h2>Lost Puppy Flyer</h2>\n<p>Please call if you find our little companion!</p>\n",
         tasks: [
             { text: "Insert an <img> tag", check: (c) => /<img\s+[^>]*>/i.test(c) },
@@ -705,9 +699,9 @@ const COURSE = [
     {
         id: 7,
         chapter: "1. Elements",
-        name: "Favorite Band",
-        speech: "Links are the superpowers of the web! An <a> tag lets people jump anywhere on the internet.",
-        desc: "Build a hyperlink (<a>) with an 'href' attribute pointing to a site (like https://wikipedia.org) and add target='_blank' so it opens in a new tab.",
+        name: "The Magic Portal",
+        speech: "Links are the superpowers of the web! An <a> tag creates a glowing portal that teleports you to another website.",
+        desc: "Before links were invented, you had to memorize long, boring web addresses. The Anchor tag (`<a>`) changed the world by letting us click a word to travel instantly!\n\nYou give it an `href` to tell it where the portal goes, and `target='_blank'` makes sure it safely opens in a brand new tab so they don't lose your page.",
         starter: "<h2>My Favorite Music</h2>\n<p>Click below to visit the band page:</p>\n",
         tasks: [
             { text: "Create an anchor <a>...</a> tag with clickable words", check: (c) => /<a\s+[^>]*>.+<\/a>/is.test(c) },
@@ -721,9 +715,9 @@ const COURSE = [
     {
         id: 8,
         chapter: "2. Structure",
-        name: "Blueprint",
-        speech: "Every true HTML page has a official foundation: doctype, html, head, title, and body!",
-        desc: "Assemble the complete standard webpage skeleton. Include <!DOCTYPE html>, wrapped in <html>, with a <head> containing a <title>, and a <body> with a sentence.",
+        name: "Building the House",
+        speech: "Every true HTML page is built like a house! It needs a foundation, a brain, and a living room.",
+        desc: "Computers are very strict. If you just throw tags on a page, they get confused! \n\nWe start with `<!DOCTYPE html>` so the computer knows we are speaking modern HTML. Then we wrap the whole house in `<html>`. The `<head>` is the brain (it holds the title), and the `<body>` is the living room where all your visible text and pictures go!",
         starter: "",
         tasks: [
             { text: "Start with <!DOCTYPE html>", check: (c) => /<!DOCTYPE\s+html>/i.test(c) },
@@ -736,9 +730,9 @@ const COURSE = [
     {
         id: 9,
         chapter: "2. Structure",
-        name: "Family Tree",
-        speech: "Tags can have children! An element inside another element is nested like a nest of birds.",
-        desc: "Practice strict nesting. Nest a <span> tag inside a <strong> tag, and make sure both are completely inside a <p> tag without crossing tags.",
+        name: "Russian Nesting Dolls",
+        speech: "Tags can have children! Putting an element inside another element is like safely nesting wooden dolls.",
+        desc: "When we nest tags, the golden rule is: the last tag you open MUST be the first tag you close! \n\nIf you open a `<p>`, then open a `<strong>`, you have to close the `</strong>` BEFORE you close the `</p>`. If you cross them up, the computer gets a tummy ache and the page breaks.",
         starter: "<p>The treasure is hidden in the secret castle.</p>\n",
         tasks: [
             { text: "Nest a <strong> inside the <p> tag", check: (c) => /<p>.*<strong>.*<\/strong>.*<\/p>/is.test(c) },
@@ -749,23 +743,23 @@ const COURSE = [
     {
         id: 10,
         chapter: "2. Structure",
-        name: "Craigslist Ad",
-        speech: "<div> is like an invisible cardboard box that holds items together on a shelf!",
-        desc: "Create a <div> container box. Inside this container, put an <h2> for an item title, a <p> for the price, and a <button> that says 'Buy Now'.",
+        name: "The Cardboard Box",
+        speech: "The <div> tag is an invisible cardboard box! It helps us group toys together on a shelf.",
+        desc: "If you have a picture of a bicycle, the price, and a buy button, you don't want them floating away from each other on a big webpage.\n\nWe use a `<div>` (Divider) to draw an invisible box around them. That way, if we want to move the bicycle to the other side of the screen later, all three pieces move together as a team!",
         starter: "<!-- Build your product card inside a div -->\n",
         tasks: [
             { text: "Open and close a <div>...</div> container", check: (c) => /<div>[\s\S]*<\/div>/i.test(c) },
             { text: "Place an <h2> heading inside the div", check: (c) => /<div>[\s\S]*<h2>.+<\/h2>[\s\S]*<\/div>/is.test(c) },
             { text: "Place a <p> and a <button> inside the same div", check: (c) => /<div>[\s\S]*<p>.+<\/p>[\s\S]*<button>.+<\/button>[\s\S]*<\/div>/is.test(c) }
         ],
-        hint: "<div><h2>Bicycle</h2><p>Price: $20</p><button>Buy</button></div>"
+        hint: "<div><h2>Bicycle</h2><p>Price: \$20</p><button>Buy</button></div>"
     },
     {
         id: 11,
         chapter: "2. Structure",
-        name: "Wiki Article",
-        speech: "<span> is an inline container! It wraps small words without kicking them onto a new line.",
-        desc: "Create a paragraph describing an animal, and wrap the scientific name inside a <span style='color: purple;'> to give it special style.",
+        name: "The Magic Highlighter",
+        speech: "A <div> creates a big block, but a <span> is tiny! It lets us wrap a single word without moving it to a new line.",
+        desc: "Imagine you are writing a sentence and want just ONE word to be purple. If you put that word in a `<div>` or a `<p>`, it will accidentally break your sentence into three different lines!\n\nThe `<span>` tag is a tiny, polite wrapper that sits quietly right in the middle of a sentence, perfect for adding special colors to single words.",
         starter: "<p>The red fox is a clever woodland creature.</p>\n",
         tasks: [
             { text: "Include a <span>...</span> tag inside the paragraph", check: (c) => /<p>.*<span>.+<\/span>.*<\/p>/is.test(c) },
@@ -776,9 +770,9 @@ const COURSE = [
     {
         id: 12,
         chapter: "2. Structure",
-        name: "Lorem Ipsum",
-        speech: "Classes let you give multiple elements the exact same group name for future styling!",
-        desc: "Create two different paragraphs, and give both of them the attribute: class='lead-story'.",
+        name: "Sports Team Uniforms",
+        speech: "Classes are like sports uniforms! You can give the exact same 'class' name to lots of different tags.",
+        desc: "If we have ten paragraphs and we want three of them to have blue backgrounds, it would take forever to style them one by one.\n\nInstead, we give those three paragraphs a `class=\"blue-team\"`. Later on, we can tell the computer: 'Hey, everyone wearing the blue-team uniform gets a blue background!' Let's hand out some uniforms.",
         starter: "<p>First paragraph.</p>\n<p>Second paragraph.</p>\n",
         tasks: [
             { text: "Give the first <p> class=\"lead-story\"", check: (c) => /<p\s+[^>]*class=["']lead-story["']/i.test(c) },
@@ -789,9 +783,9 @@ const COURSE = [
     {
         id: 13,
         chapter: "2. Structure",
-        name: "Power Rangers",
-        speech: "While classes can be shared, an ID must be 100% unique—like a person's fingerprint!",
-        desc: "Create three <div> boxes. Give the first box id='red-ranger', the second id='blue-ranger', and the third id='yellow-ranger'.",
+        name: "The Secret Identity",
+        speech: "While many elements can share a class, an ID is a secret superhero identity! It must be 100% unique.",
+        desc: "Think of a class like a school uniform, but an ID is your actual fingerprint. No two tags on a webpage are EVER allowed to have the same ID.\n\nWe use IDs when a tag is so important that the computer needs to find it instantly, like the main 'Submit' button or the very top of the page.",
         starter: "",
         tasks: [
             { text: "Create a div with id=\"red-ranger\"", check: (c) => /<div\s+[^>]*id=["']red-ranger["']/i.test(c) },
@@ -803,9 +797,9 @@ const COURSE = [
     {
         id: 14,
         chapter: "2. Structure",
-        name: "MySpace Top 8",
-        speech: "Tables display structured grid rows and columns using <table>, <tr>, <th>, and <td>!",
-        desc: "Build a mini table with <table>. Add a row (<tr>) with table headings (<th>), followed by a data row with table cells (<td>).",
+        name: "The Neat Bookshelf",
+        speech: "Tables are like magical bookshelves! They display information perfectly in rows and columns.",
+        desc: "Before modern layouts were invented, people built entire websites using tables! Today, we use them for things that look like spreadsheets or leaderboards.\n\nThe `<table>` is the whole shelf. A `<tr>` is a flat Row across the shelf. A `<th>` is a bold Header column, and `<td>` holds the actual Data in the little cubbies!",
         starter: "<h3>My Top Friends Table</h3>\n",
         tasks: [
             { text: "Open and close a <table>...</table> tag", check: (c) => /<table>[\s\S]*<\/table>/i.test(c) },
@@ -819,9 +813,9 @@ const COURSE = [
     {
         id: 15,
         chapter: "3. Forms",
-        name: "Google Search Bar",
-        speech: "Time to interact with our visitors! Forms accept typing input using the <input> tag.",
-        desc: "Create a <form> containing a single text input with placeholder='Search the galaxy...' so people know what to type.",
+        name: "The Magic Mailbox",
+        speech: "Time to talk to our visitors! Forms create magical mailboxes where people can type messages.",
+        desc: "A webpage shouldn't just be something you read; it should be something you can play with! \n\nThe `<form>` tag creates a secure zone for collecting answers. Inside it, we use `<input>` tags to draw empty white boxes where visitors can type their names, passwords, or search queries.",
         starter: "<h2>Search the Web</h2>\n",
         tasks: [
             { text: "Create a <form>...</form> container", check: (c) => /<form>[\s\S]*<\/form>/i.test(c) },
@@ -833,9 +827,9 @@ const COURSE = [
     {
         id: 16,
         chapter: "3. Forms",
-        name: "Sign Up v1",
-        speech: "Every input needs a <label> so users (and screen readers) know what to type!",
-        desc: "Build a form with an email input and a password input. Use <label for='...'> paired with matching <input id='...'>.",
+        name: "The Name Tag",
+        speech: "Every mailbox needs a <label> so people (and computers) know what kind of mail goes inside!",
+        desc: "If you just put five blank text boxes on a screen, nobody would know where to type their name and where to type their email! \n\nA `<label>` acts as a sticky note next to the box. We use the `for=\"...\"` attribute to magically connect the label directly to the `id` of the input box.",
         starter: "<h3>Account Sign Up</h3>\n<form>\n</form>\n",
         tasks: [
             { text: "Include an <input type=\"email\">", check: (c) => /<input\s+[^>]*type=["']email["']/i.test(c) },
@@ -847,9 +841,9 @@ const COURSE = [
     {
         id: 17,
         chapter: "3. Forms",
-        name: "Sign Up v2",
-        speech: "Checkboxes let people pick multiple items, while radio buttons pick one choice!",
-        desc: "Add a checkbox (<input type='checkbox'>) for 'Agree to Rules' and two radio buttons (<input type='radio' name='plan'>) for choosing a level.",
+        name: "Choose Your Adventure",
+        speech: "Checkboxes are for grabbing lots of snacks, but Radio buttons mean you can only pick ONE!",
+        desc: "Sometimes we don't want visitors to type; we just want them to click! \n\n`<input type=\"checkbox\">` creates square boxes where users can check off as many items as they want (like choosing toppings on a pizza). But `<input type=\"radio\">` creates little circles where picking a new option magically un-selects the old one!",
         starter: "<form>\n  <p>Select your tier:</p>\n</form>\n",
         tasks: [
             { text: "Add at least one <input type=\"checkbox\">", check: (c) => /<input\s+[^>]*type=["']checkbox["']/i.test(c) },
@@ -860,9 +854,9 @@ const COURSE = [
     {
         id: 18,
         chapter: "3. Forms",
-        name: "RSVP",
-        speech: "Dropdown menus keep forms neat when there are many choices to pick from!",
-        desc: "Create a dropdown selector using <select>. Inside, add three <option> tags for: 'Yes', 'No', and 'Maybe'.",
+        name: "The Hidden Scroll",
+        speech: "Dropdown menus keep forms neat by hiding long lists until someone clicks on them!",
+        desc: "If you have 50 different countries for someone to pick from, listing them all with radio buttons would make your webpage 100 pages long! \n\nThe `<select>` tag creates a little dropdown drawer, and the `<option>` tags are the folded up papers inside it. It saves tons of space!",
         starter: "<h3>Birthday Party RSVP</h3>\n<form>\n  <label>Will you attend?</label>\n</form>\n",
         tasks: [
             { text: "Create a <select>...</select> dropdown", check: (c) => /<select>[\s\S]*<\/select>/i.test(c) },
@@ -873,9 +867,9 @@ const COURSE = [
     {
         id: 19,
         chapter: "3. Forms",
-        name: "Contact Us",
-        speech: "When someone wants to write a long letter, regular input is too tiny. We use <textarea>!",
-        desc: "Add a <textarea> tag with rows='4' and cols='30' so users can write a paragraph of feedback.",
+        name: "The Giant Canvas",
+        speech: "When someone wants to write a long letter, a regular input box is too tiny. We use <textarea>!",
+        desc: "A regular `<input type=\"text\">` is only meant for short things like names or phone numbers. If a user tries to type a whole story in one, it gets really frustrating.\n\nThe `<textarea>` tag gives them a giant, stretchy canvas where they can press 'Enter', make paragraphs, and tell you a whole story!",
         starter: "<h3>Feedback Form</h3>\n<form>\n</form>\n",
         tasks: [
             { text: "Add a <textarea>...</textarea> tag", check: (c) => /<textarea[\s\S]*<\/textarea>/i.test(c) },
@@ -886,9 +880,9 @@ const COURSE = [
     {
         id: 20,
         chapter: "3. Forms",
-        name: "Welp",
-        speech: "Finish the form with a Submit button so data can travel across the internet!",
-        desc: "Combine what you learned: create a complete review form with an input, a select dropdown, and a <button type='submit'>Submit</button>.",
+        name: "The Delivery Owl",
+        speech: "Finish the form with a Submit button so the answers can fly across the internet!",
+        desc: "A form full of answers is useless if it just sits on the screen. We need a way to send it to the server!\n\nAdding a `<button type=\"submit\">` creates a magic launcher. When the user clicks it, the browser gathers up all the inputs, packs them into a digital envelope, and shoots them across the internet like a delivery owl.",
         starter: "<h3>Restaurant Review</h3>\n<form>\n</form>\n",
         tasks: [
             { text: "Contain an <input> inside the form", check: (c) => /<form>[\s\S]*<input[^>]*>[\s\S]*<\/form>/is.test(c) },
@@ -902,9 +896,9 @@ const COURSE = [
     {
         id: 21,
         chapter: "4. Semantic HTML",
-        name: "Personal Blog",
-        speech: "Semantic tags give human meaning to the webpage structure: header, main, and footer!",
-        desc: "Lay out the primary structure of a personal blog using the three pillars: <header>, <main>, and <footer>.",
+        name: "The Magic Sandwich",
+        speech: "Semantic tags give true human meaning to the webpage layout: Header, Main, and Footer!",
+        desc: "In the old days, people just used 100 `<div>` boxes for everything. But blind screen-readers and Google search robots got super confused looking at boxes!\n\nNow, we make a Semantic Sandwich: The `<header>` is the top bun containing the logo. The `<main>` is the yummy meat in the middle holding the story. The `<footer>` is the bottom bun with the copyright.",
         starter: "",
         tasks: [
             { text: "Add a <header> with an <h1> title inside", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<\/header>/is.test(c) },
@@ -916,9 +910,9 @@ const COURSE = [
     {
         id: 22,
         chapter: "4. Semantic HTML",
-        name: "The Header & Nav",
-        speech: "Navigation bars tell visitors how to travel around your website using the <nav> element!",
-        desc: "Inside a <header>, create a <nav> bar holding an unordered list (<ul>) of links (<a>) pointing to Home and About.",
+        name: "The Treasure Map",
+        speech: "Navigation bars are like treasure maps, helping visitors travel safely around your website!",
+        desc: "If you have a website with 50 pages, visitors will get lost instantly! \n\nWe fix this by creating a `<nav>` (Navigation) block. By placing a list of links inside a `<nav>` tag, we are officially declaring to the computer: 'Hey! These aren't just random links, this is the main steering wheel for the whole website!'",
         starter: "<header>\n  <h1>Adventure Land</h1>\n</header>\n",
         tasks: [
             { text: "Place a <nav>...</nav> tag inside <header>", check: (c) => /<header>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
@@ -929,9 +923,9 @@ const COURSE = [
     {
         id: 23,
         chapter: "4. Semantic HTML",
-        name: "Main Footers",
-        speech: "Divide your main page into organized sections using the semantic <section> tag!",
-        desc: "Inside <main>, construct two distinct <section> blocks. Give each section its own <h2> heading and <p> content.",
+        name: "Rooms in the Castle",
+        speech: "Divide your big pages into organized, tidy rooms using the semantic <section> tag!",
+        desc: "Imagine a house without walls. The kitchen, bedroom, and bathroom would all be mixed together! \n\nWhen a webpage gets really long, we use the `<section>` tag to build walls. Each section groups a specific topic together, and every single section should have its very own `<h2>` heading so visitors know which room they just walked into.",
         starter: "<main>\n</main>\n",
         tasks: [
             { text: "Include at least two <section>...</section> elements", check: (c) => (c.match(/<section>/gi) || []).length >= 2 },
@@ -942,9 +936,9 @@ const COURSE = [
     {
         id: 24,
         chapter: "4. Semantic HTML",
-        name: "Blog Posts",
-        speech: "Articles represent self-contained stories that make sense all on their own with <article>!",
-        desc: "Construct an independent <article>. Inside it, write an <h2> for the article headline, a <p> for the story, and a <time> or date notice.",
+        name: "The Message in a Bottle",
+        speech: "Articles represent self-contained stories that make sense all on their own!",
+        desc: "A `<section>` is just a room in a house, but an `<article>` is like a message in a bottle. \n\nIf you threw an `<article>` into the ocean and someone found it on a completely different website, it would still make perfect sense! We use articles for blog posts, news stories, and forum comments because they are complete, independent thoughts.",
         starter: "<main>\n</main>\n",
         tasks: [
             { text: "Add an <article>...</article> tag inside main", check: (c) => /<main>[\s\S]*<article>[\s\S]*<\/article>[\s\S]*<\/main>/is.test(c) },
@@ -955,9 +949,9 @@ const COURSE = [
     {
         id: 25,
         chapter: "4. Semantic HTML",
-        name: "Figures & Captions",
-        speech: "Photos in articles look best with proper captions using <figure> and <figcaption>!",
-        desc: "Wrap an image (<img>) inside a <figure> container, and add a descriptive text title right below it using <figcaption>.",
+        name: "The Golden Frame",
+        speech: "Photos in articles look best with a golden frame and a brass nameplate using <figure>!",
+        desc: "If you just drop an `<img>` tag into an article, it's just a loose photo sitting on the desk. \n\nWrapping the image inside a `<figure>` acts like a heavy, beautiful wooden frame. Then, adding a `<figcaption>` right under the image acts as a little brass nameplate explaining exactly what the picture is showing!",
         starter: "",
         tasks: [
             { text: "Create a <figure>...</figure> element", check: (c) => /<figure>[\s\S]*<\/figure>/is.test(c) },
@@ -969,9 +963,9 @@ const COURSE = [
     {
         id: 26,
         chapter: "4. Semantic HTML",
-        name: "Final Touches: Capstone Project",
+        name: "The Grand Masterpiece",
         speech: "YOU MADE IT TO THE SUMMIT! Now assemble everything into your very own Master Webpage!",
-        desc: "Capstone Challenge: Build a complete webpage featuring: <!DOCTYPE html>, a <header> with <h1>, a <nav> with links, a <main> with an <article>, a <form> with a button, and a <footer>!",
+        desc: "Afifa, you have collected all the magical HTML building blocks. You know how to build foundations, draw boxes, collect mail, and lay out articles.\n\nFor your final Capstone Challenge, you must combine everything. Build a complete webpage featuring a `<header>`, a `<nav>` map, a `<main>` body with an `<article>`, a `<form>` to write to you, and a `<footer>`! Sparkle is cheering you on!",
         starter: "<!DOCTYPE html>\n<html>\n<head><title>Afifa's Showcase</title></head>\n<body>\n\n</body>\n</html>",
         tasks: [
             { text: "Include <header> with <h1> and a <nav>", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
