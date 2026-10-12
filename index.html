@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afifa's HTML Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-canvas: #fdf6fb;
+            --pink-accent: #ff4081;
+            --pink-soft: #fce4ec;
+            --pink-deep: #c2185b;
+            --mint-green: #00e676;
+            --mint-deep: #00a854;
+            --purple-border: #7b1fa2;
+            --purple-light: #f3e5f5;
+            --amber: #ffb300;
+            --dark-ink: #263238;
+            --gray-locked: #cfd8dc;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Fredoka', cursive, sans-serif;
+            background-color: var(--bg-canvas);
+            background-image: 
+                radial-gradient(#ffcdd2 15%, transparent 16%),
+                radial-gradient(#e1bee7 15%, transparent 16%);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            color: var(--dark-ink);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* App Shell */
+        #app {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        #sidebar {
+            width: 340px;
+            background: var(--white);
+            border-right: 4px solid var(--purple-border);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 15px rgba(123, 31, 162, 0.08);
+            z-index: 10;
+        }
+
+        .brand-header {
+            padding: 16px 20px;
+            background: var(--pink-soft);
+            border-bottom: 4px solid var(--purple-border);
+            text-align: center;
+        }
+
+        .brand-header h1 {
+            font-size: 1.45rem;
+            color: var(--pink-deep);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 14px;
+            background: #fff;
+            border-bottom: 3px solid #eee;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .stat-pill {
+            background: var(--purple-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 2px solid var(--purple-border);
+            color: var(--purple-border);
+        }
+
+        .syllabus-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px 12px;
+        }
+
+        .chapter-group {
+            margin-bottom: 18px;
+            background: #fafafa;
+            border: 3px solid #e0e0e0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .chapter-header {
+            padding: 10px 14px;
+            background: #eceff1;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #455a64;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-item {
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-top: 1px dashed #e0e0e0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .exercise-item:hover:not(.locked) {
+            background: var(--purple-light);
+        }
+
+        .exercise-item.active {
+            background: #ffecb3;
+            color: #d84315;
+            border-left: 6px solid var(--amber);
+        }
+
+        .exercise-item.locked {
+            opacity: 0.45;
+            cursor: not-allowed;
+            color: #78909c;
+        }
+
+        .exercise-item.completed .badge {
+            background: var(--mint-green);
+            color: white;
+            border-color: var(--mint-deep);
+        }
+
+        .badge {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid #b0bec5;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Main Workspace */
+        #workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Stage Banner */
+        #topbar {
+            height: 64px;
+            background: white;
+            border-bottom: 4px solid var(--purple-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .current-tag {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--purple-border);
+        }
+
+        .action-tools {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Split Stage Panels */
+        #stage-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 380px 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        /* Card Container Styles */
+        .stage-box {
+            background: white;
+            border: 4px solid var(--purple-border);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 8px 0 rgba(123, 31, 162, 0.15);
+        }
+
+        .stage-box-header {
+            padding: 10px 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid #eee;
+        }
+
+        /* Lesson & Mascot Panel */
+        #panel-instructions {
+            background: #fffdfd;
+        }
+
+        .mascot-stage {
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--pink-soft);
+            border-bottom: 3px dashed #f48fb1;
+        }
+
+        .bunny-svg {
+            width: 78px;
+            height: 78px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
+            animation: rabbitFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes rabbitFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .dialogue-balloon {
+            background: white;
+            border: 3px solid var(--pink-accent);
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            line-height: 1.35;
+            color: #37474f;
+            position: relative;
+        }
+
+        .mission-body {
+            padding: 16px;
+            overflow-y: auto;
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .mission-body h3 {
+            color: var(--pink-deep);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .mission-desc {
+            margin-bottom: 14px;
+            color: #455a64;
+        }
+
+        .tasks-box {
+            background: #f1f8e9;
+            border: 2px solid #aed581;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
+        }
+
+        .tasks-box h4 {
+            color: #33691e;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 6px;
+            border: 2px solid #689f38;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: white;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .task-item.complete .task-checkbox {
+            background: var(--mint-green);
+            border-color: var(--mint-deep);
+        }
+
+        .hint-drawer {
+            margin-top: 10px;
+            padding: 10px 12px;
+            background: #fff8e1;
+            border: 2px dashed #ffe082;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: #795548;
+            display: none;
+        }
+
+        /* Code Editor Panel */
+        #panel-editor {
+            position: relative;
+        }
+
+        .code-textarea {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            background: #282a36;
+            color: #f8f8f2;
+            resize: none;
+            outline: none;
+            user-select: text;
+        }
+
+        /* Preview Panel */
+        #panel-preview {
+            background: #ffffff;
+        }
+
+        .preview-frame-wrap {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            background: white;
+            overflow: auto;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        /* Buttons & Utility Controls */
+        .cartoon-btn {
+            font-family: 'Fredoka', cursive, sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 8px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 3px solid var(--dark-ink);
+            box-shadow: 0 4px 0 var(--dark-ink);
+            transition: all 0.08s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .cartoon-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 var(--dark-ink);
+        }
+
+        .btn-check {
+            background: var(--mint-green);
+            color: #003300;
+        }
+
+        .btn-hint {
+            background: var(--amber);
+            color: #3e2723;
+        }
+
+        .btn-reset {
+            background: #eeeeee;
+            color: #424242;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+        }
+
+        /* Celebration Screen Overlay */
+        #celebration-screen {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.94);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 24px;
+        }
+
+        #celebration-screen h2 {
+            font-size: 3.2rem;
+            color: var(--pink-deep);
+            margin: 15px 0 10px;
+            text-shadow: 3px 3px 0 #ffd7e8;
+        }
+
+        #celebration-screen p {
+            font-size: 1.4rem;
+            color: #455a64;
+            max-width: 550px;
+            margin-bottom: 25px;
+        }
+
+        .big-bunny {
+            width: 170px;
+            height: 170px;
+            animation: rabbitCelebrate 0.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes rabbitCelebrate {
+            from { transform: scale(1) rotate(-4deg); }
+            to { transform: scale(1.1) rotate(4deg); }
+        }
+
+        /* Feedback Toast */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #ff5252;
+            color: white;
+            border: 3px solid #b71c1c;
+            box-shadow: 0 6px 0 #b71c1c;
+            padding: 12px 20px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: none;
+            z-index: 999;
+            animation: bounceShake 0.4s ease;
+        }
+
+        @keyframes bounceShake {
+            0% { transform: translateY(20px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- Syllabus Sidebar -->
+    <aside id="sidebar">
+        <div class="brand-header">
+            <h1><span>🐰</span> Afifa's Code Quest</h1>
+        </div>
+        <div class="stats-bar">
+            <div class="stat-pill">Level <span id="stat-level">1</span>/26</div>
+            <div class="stat-pill">✨ <span id="stat-xp">0</span> XP</div>
+        </div>
+        <div class="syllabus-scroll" id="chapter-list">
+            <!-- Dynamically populated from course database -->
+        </div>
+    </aside>
+
+    <!-- Main Coding Playground -->
+    <main id="workspace">
+        <!-- Top Control Bar -->
+        <header id="topbar">
+            <div class="current-tag" id="current-title">Chapter 1: Elements &bull; Exercise 1</div>
+            <div class="action-tools">
+                <button class="cartoon-btn btn-hint" onclick="toggleHint()">💡 Hint</button>
+                <button class="cartoon-btn btn-reset" onclick="resetEditor()">🔄 Reset</button>
+                <button class="cartoon-btn btn-check" onclick="evaluateCode()">✨ Run Code!</button>
+            </div>
+        </header>
+
+        <!-- 3-Column Split Stage -->
+        <div id="stage-grid">
+            <!-- Col 1: Sparkle & Instructions -->
+            <section class="stage-box" id="panel-instructions">
+                <div class="mascot-stage">
+                    <svg class="bunny-svg" viewBox="0 0 100 100">
+                        <ellipse cx="32" cy="24" rx="9" ry="24" fill="#ffffff" stroke="#263238" stroke-width="3" transform="rotate(-12 32 24)"/>
+                        <ellipse cx="68" cy="24" rx="9" ry="24" fill="#ffffff" stroke="#263238" stroke-width="3" transform="rotate(12 68 24)"/>
+                        <ellipse cx="32" cy="24" rx="4.5" ry="15" fill="#ff4081" transform="rotate(-12 32 24)"/>
+                        <ellipse cx="68" cy="24" rx="4.5" ry="15" fill="#ff4081" transform="rotate(12 68 24)"/>
+                        <circle cx="50" cy="62" r="34" fill="#ffffff" stroke="#263238" stroke-width="3"/>
+                        <ellipse cx="36" cy="56" rx="4.5" ry="6" fill="#263238"/>
+                        <ellipse cx="64" cy="56" rx="4.5" ry="6" fill="#263238"/>
+                        <circle cx="38" cy="54" r="1.8" fill="#ffffff"/>
+                        <circle cx="66" cy="54" r="1.8" fill="#ffffff"/>
+                        <circle cx="26" cy="66" r="6" fill="#ff80ab" opacity="0.65"/>
+                        <circle cx="74" cy="66" r="6" fill="#ff80ab" opacity="0.65"/>
+                        <polygon points="50,64 45,61 55,61" fill="#ff4081"/>
+                        <path d="M 44 68 Q 50 74 56 68" fill="none" stroke="#263238" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <div class="dialogue-balloon" id="sparkle-say">
+                        Hello Afifa! Let's explore the world of code together!
+                    </div>
+                </div>
+
+                <div class="mission-body">
+                    <h3 id="mission-headline">Mission Overview</h3>
+                    <div class="mission-desc" id="mission-text">
+                        Loading challenge details...
+                    </div>
+
+                    <div class="tasks-box">
+                        <h4>Missions Checklist:</h4>
+                        <ul class="task-list" id="checklist">
+                            <!-- Tasks injected dynamically -->
+                        </ul>
+                    </div>
+
+                    <div class="hint-drawer" id="hint-box"></div>
+                </div>
+            </section>
+
+            <!-- Col 2: Code Editor -->
+            <section class="stage-box" id="panel-editor">
+                <div class="stage-box-header" style="background: #21222c; color: #f8f8f2; border-bottom: 2px solid #44475a;">
+                    <span>⌨️ Code Editor (index.html)</span>
+                </div>
+                <textarea class="code-textarea" id="user-editor" spellcheck="false" placeholder="Write HTML tags here..."></textarea>
+            </section>
+
+            <!-- Col 3: Live Preview -->
+            <section class="stage-box" id="panel-preview">
+                <div class="stage-box-header" style="background: #e8f5e9; color: #1b5e20;">
+                    <span>📺 Live Browser Preview</span>
+                </div>
+                <div class="preview-frame-wrap">
+                    <iframe id="preview-sandbox"></iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<!-- Success Popup Modal -->
+<div id="celebration-screen">
+    <svg class="big-bunny" viewBox="0 0 100 100">
+        <ellipse cx="32" cy="24" rx="9" ry="24" fill="#ffffff" stroke="#263238" stroke-width="3" transform="rotate(-15 32 24)"/>
+        <ellipse cx="68" cy="24" rx="9" ry="24" fill="#ffffff" stroke="#263238" stroke-width="3" transform="rotate(15 68 24)"/>
+        <ellipse cx="32" cy="24" rx="4.5" ry="15" fill="#ff4081" transform="rotate(-15 32 24)"/>
+        <ellipse cx="68" cy="24" rx="4.5" ry="15" fill="#ff4081" transform="rotate(15 68 24)"/>
+        <circle cx="50" cy="62" r="34" fill="#ffffff" stroke="#263238" stroke-width="3"/>
+        <path d="M 30 56 Q 36 48 42 56" fill="none" stroke="#263238" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M 58 56 Q 64 48 70 56" fill="none" stroke="#263238" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="24" cy="66" r="7" fill="#ff80ab" opacity="0.7"/>
+        <circle cx="76" cy="66" r="7" fill="#ff80ab" opacity="0.7"/>
+        <polygon points="50,65 44,62 56,62" fill="#ff4081"/>
+        <path d="M 42 70 Q 50 82 58 70" fill="#ff4081" stroke="#263238" stroke-width="2.5"/>
+    </svg>
+    <h2>SUPERSTAR CODER! 🌟</h2>
+    <p id="celebration-msg">You solved all the puzzles in this lesson!</p>
+    <button class="cartoon-btn btn-check" style="font-size: 1.4rem; padding: 14px 34px;" onclick="advanceLevel()">Continue Journey 🚀</button>
+</div>
+
+<!-- Warning / Error Toast -->
+<div id="toast"></div>
+
+<script>
+/**
+ * 26 Complete Exercises mapping directly to Codédex HTML Curriculum:
+ * Ch 1: Elements (Ex 1 to 7)
+ * Ch 2: Structure (Ex 8 to 14)
+ * Ch 3: Forms (Ex 15 to 20)
+ * Ch 4: Semantic HTML (Ex 21 to 26)
+ */
+const COURSE = [
+    // CHAPTER 1: ELEMENTS
+    {
+        id: 1,
+        chapter: "1. Elements",
+        name: "Shooting Star",
+        speech: "Welcome to coding, Afifa! A webpage needs an <h1> title and a <p> sentence. Let's make a wish upon a star!",
+        desc: "Build a stargazing webpage. You need to write a big heading and a descriptive paragraph under it.",
+        starter: "<!-- Type your heading and paragraph below -->\n",
+        tasks: [
+            { text: "Add an <h1> heading that contains text", check: (c) => /<h1>.+<\/h1>/is.test(c) },
+            { text: "Add a <p> paragraph right underneath", check: (c) => /<p>.+<\/p>/is.test(c) }
+        ],
+        hint: "Type: <h1>Shooting Star!</h1> followed by <p>I wish for magic skills.</p>"
+    },
+    {
+        id: 2,
+        chapter: "1. Elements",
+        name: "Elemental",
+        speech: "Headings come in different sizes, from h1 (biggest) down to h3! Can you order them properly?",
+        desc: "Webpages use heading ranks for structure. Create three headings: an <h1> for the main title, an <h2> for a subtitle, and an <h3> for a small section note.",
+        starter: "<h1>The Ocean World</h1>\n",
+        tasks: [
+            { text: "Keep the <h1> heading for the main title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
+            { text: "Create an <h2> heading for the subtitle", check: (c) => /<h2>.+<\/h2>/is.test(c) },
+            { text: "Create an <h3> heading for the minor topic", check: (c) => /<h3>.+<\/h3>/is.test(c) }
+        ],
+        hint: "Add <h2>Friendly Dolphins</h2> and <h3>Tiny Coral Reefs</h3> below the h1."
+    },
+    {
+        id: 3,
+        chapter: "1. Elements",
+        name: "Newspaper",
+        speech: "Newspapers use paragraphs and dividing lines! Let's format our first breaking news article.",
+        desc: "Write two distinct paragraphs (<p>), and separate them cleanly with a horizontal divider line (<hr>) and insert a line break (<br>) inside the first paragraph.",
+        starter: "<p>Morning News edition.</p>\n",
+        tasks: [
+            { text: "Have at least two separate <p> paragraphs", check: (c) => (c.match(/<p>/gi) || []).length >= 2 && (c.match(/<\/p>/gi) || []).length >= 2 },
+            { text: "Add a line-break <br> inside a paragraph", check: (c) => /<br\s*\/?>/i.test(c) },
+            { text: "Put a horizontal rule line <hr> between items", check: (c) => /<hr\s*\/?>/i.test(c) }
+        ],
+        hint: "Put <hr> between your two paragraphs, and put <br> inside your sentence to jump to a new line!"
+    },
+    {
+        id: 4,
+        chapter: "1. Elements",
+        name: "Corporate Talk",
+        speech: "We can make words stand out! Use <strong> for bold words and <em> for italic words.",
+        desc: "Create a paragraph where at least one word is wrapped in <strong> to make it bold, and at least one word is wrapped in <em> to emphasize it in italics.",
+        starter: "<p>Learning code is fun and exciting!</p>\n",
+        tasks: [
+            { text: "Wrap a word inside <strong>...</strong>", check: (c) => /<strong>.+<\/strong>/is.test(c) },
+            { text: "Wrap a word inside <em>...</em>", check: (c) => /<em>.+<\/em>/is.test(c) },
+            { text: "Keep everything neatly inside a <p> tag", check: (c) => /<p>.*<strong>.*<\/p>/is.test(c) || /<p>.*<em>.*<\/p>/is.test(c) }
+        ],
+        hint: "Try: <p>Learning code is <strong>super</strong> and <em>magical</em>!</p>"
+    },
+    {
+        id: 5,
+        chapter: "1. Elements",
+        name: "Sous-Chef",
+        speech: "Let's bake a cake! Chefs need recipe lists. We have bullet lists (<ul>) and numbered lists (<ol>)!",
+        desc: "Create an unordered list (<ul>) with 2 ingredient items (<li>), followed by an ordered list (<ol>) with 2 cooking steps (<li>).",
+        starter: "<h3>Baking Cupcakes</h3>\n",
+        tasks: [
+            { text: "Build an unordered list <ul> with at least two <li> items", check: (c) => /<ul>\s*(<li>.*?<\/li>\s*){2,}<\/ul>/is.test(c) },
+            { text: "Build an ordered list <ol> with at least two <li> items", check: (c) => /<ol>\s*(<li>.*?<\/li>\s*){2,}<\/ol>/is.test(c) }
+        ],
+        hint: "Use <ul><li>Flour</li><li>Sugar</li></ul> and then <ol><li>Mix</li><li>Bake</li></ol>."
+    },
+    {
+        id: 6,
+        chapter: "1. Elements",
+        name: "Lost Pet",
+        speech: "Oh no, a puppy is wandering! We need to show a picture so everyone can recognize him.",
+        desc: "Add an image (<img>) tag with a valid 'src' link attribute and an 'alt' description attribute so screen-readers can read it.",
+        starter: "<h2>Lost Puppy Flyer</h2>\n<p>Please call if you find our little companion!</p>\n",
+        tasks: [
+            { text: "Insert an <img> tag", check: (c) => /<img\s+[^>]*>/i.test(c) },
+            { text: "Provide a src attribute with a URL", check: (c) => /<img\s+[^>]*src=["'][^"']+["']/i.test(c) },
+            { text: "Include an alt attribute explaining the picture", check: (c) => /<img\s+[^>]*alt=["'][^"']+["']/i.test(c) }
+        ],
+        hint: 'Use: <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=200" alt="Cute puppy">'
+    },
+    {
+        id: 7,
+        chapter: "1. Elements",
+        name: "Favorite Band",
+        speech: "Links are the superpowers of the web! An <a> tag lets people jump anywhere on the internet.",
+        desc: "Build a hyperlink (<a>) with an 'href' attribute pointing to a site (like https://wikipedia.org) and add target='_blank' so it opens in a new tab.",
+        starter: "<h2>My Favorite Music</h2>\n<p>Click below to visit the band page:</p>\n",
+        tasks: [
+            { text: "Create an anchor <a>...</a> tag with clickable words", check: (c) => /<a\s+[^>]*>.+<\/a>/is.test(c) },
+            { text: "Include an href attribute pointing to a website", check: (c) => /<a\s+[^>]*href=["']https?:\/\/[^"']+["']/i.test(c) },
+            { text: "Set target=\"_blank\" so the link opens safely", check: (c) => /<a\s+[^>]*target=["']_blank["']/i.test(c) }
+        ],
+        hint: '<a href="https://wikipedia.org" target="_blank">Visit Encyclopedia</a>'
+    },
+
+    // CHAPTER 2: STRUCTURE
+    {
+        id: 8,
+        chapter: "2. Structure",
+        name: "Blueprint",
+        speech: "Every true HTML page has a official foundation: doctype, html, head, title, and body!",
+        desc: "Assemble the complete standard webpage skeleton. Include <!DOCTYPE html>, wrapped in <html>, with a <head> containing a <title>, and a <body> with a sentence.",
+        starter: "",
+        tasks: [
+            { text: "Start with <!DOCTYPE html>", check: (c) => /<!DOCTYPE\s+html>/i.test(c) },
+            { text: "Wrap everything in <html>...</html>", check: (c) => /<html>[\s\S]*<\/html>/i.test(c) },
+            { text: "Add <head><title>My Page</title></head>", check: (c) => /<head>[\s\S]*<title>.+<\/title>[\s\S]*<\/head>/i.test(c) },
+            { text: "Add a <body> tag with text content", check: (c) => /<body>[\s\S]*.+[\s\S]*<\/body>/i.test(c) }
+        ],
+        hint: "<!DOCTYPE html>\n<html>\n<head><title>Quest</title></head>\n<body><p>Hello!</p></body>\n</html>"
+    },
+    {
+        id: 9,
+        chapter: "2. Structure",
+        name: "Family Tree",
+        speech: "Tags can have children! An element inside another element is nested like a nest of birds.",
+        desc: "Practice strict nesting. Nest a <span> tag inside a <strong> tag, and make sure both are completely inside a <p> tag without crossing tags.",
+        starter: "<p>The treasure is hidden in the secret castle.</p>\n",
+        tasks: [
+            { text: "Nest a <strong> inside the <p> tag", check: (c) => /<p>.*<strong>.*<\/strong>.*<\/p>/is.test(c) },
+            { text: "Nest a <span> inside the <strong> tag", check: (c) => /<strong>.*<span>.*<\/span>.*<\/strong>/is.test(c) }
+        ],
+        hint: "<p>The treasure is <strong><span>deep inside</span></strong> the castle.</p>"
+    },
+    {
+        id: 10,
+        chapter: "2. Structure",
+        name: "Craigslist Ad",
+        speech: "<div> is like an invisible cardboard box that holds items together on a shelf!",
+        desc: "Create a <div> container box. Inside this container, put an <h2> for an item title, a <p> for the price, and a <button> that says 'Buy Now'.",
+        starter: "<!-- Build your product card inside a div -->\n",
+        tasks: [
+            { text: "Open and close a <div>...</div> container", check: (c) => /<div>[\s\S]*<\/div>/i.test(c) },
+            { text: "Place an <h2> heading inside the div", check: (c) => /<div>[\s\S]*<h2>.+<\/h2>[\s\S]*<\/div>/is.test(c) },
+            { text: "Place a <p> and a <button> inside the same div", check: (c) => /<div>[\s\S]*<p>.+<\/p>[\s\S]*<button>.+<\/button>[\s\S]*<\/div>/is.test(c) }
+        ],
+        hint: "<div><h2>Bicycle</h2><p>Price: $20</p><button>Buy</button></div>"
+    },
+    {
+        id: 11,
+        chapter: "2. Structure",
+        name: "Wiki Article",
+        speech: "<span> is an inline container! It wraps small words without kicking them onto a new line.",
+        desc: "Create a paragraph describing an animal, and wrap the scientific name inside a <span style='color: purple;'> to give it special style.",
+        starter: "<p>The red fox is a clever woodland creature.</p>\n",
+        tasks: [
+            { text: "Include a <span>...</span> tag inside the paragraph", check: (c) => /<p>.*<span>.+<\/span>.*<\/p>/is.test(c) },
+            { text: "Give the span a style attribute (e.g., color: purple;)", check: (c) => /<span\s+style=["'][^"']+["']>/i.test(c) }
+        ],
+        hint: '<p>The fox is <span style="color: purple;">Vulpes vulpes</span> in Latin.</p>'
+    },
+    {
+        id: 12,
+        chapter: "2. Structure",
+        name: "Lorem Ipsum",
+        speech: "Classes let you give multiple elements the exact same group name for future styling!",
+        desc: "Create two different paragraphs, and give both of them the attribute: class='lead-story'.",
+        starter: "<p>First paragraph.</p>\n<p>Second paragraph.</p>\n",
+        tasks: [
+            { text: "Give the first <p> class=\"lead-story\"", check: (c) => /<p\s+[^>]*class=["']lead-story["']/i.test(c) },
+            { text: "Give the second <p> class=\"lead-story\" as well", check: (c) => (c.match(/class=["']lead-story["']/gi) || []).length >= 2 }
+        ],
+        hint: '<p class="lead-story">Story 1</p>\n<p class="lead-story">Story 2</p>'
+    },
+    {
+        id: 13,
+        chapter: "2. Structure",
+        name: "Power Rangers",
+        speech: "While classes can be shared, an ID must be 100% unique—like a person's fingerprint!",
+        desc: "Create three <div> boxes. Give the first box id='red-ranger', the second id='blue-ranger', and the third id='yellow-ranger'.",
+        starter: "",
+        tasks: [
+            { text: "Create a div with id=\"red-ranger\"", check: (c) => /<div\s+[^>]*id=["']red-ranger["']/i.test(c) },
+            { text: "Create a div with id=\"blue-ranger\"", check: (c) => /<div\s+[^>]*id=["']blue-ranger["']/i.test(c) },
+            { text: "Create a div with id=\"yellow-ranger\"", check: (c) => /<div\s+[^>]*id=["']yellow-ranger["']/i.test(c) }
+        ],
+        hint: '<div id="red-ranger">Red</div>\n<div id="blue-ranger">Blue</div>\n<div id="yellow-ranger">Yellow</div>'
+    },
+    {
+        id: 14,
+        chapter: "2. Structure",
+        name: "MySpace Top 8",
+        speech: "Tables display structured grid rows and columns using <table>, <tr>, <th>, and <td>!",
+        desc: "Build a mini table with <table>. Add a row (<tr>) with table headings (<th>), followed by a data row with table cells (<td>).",
+        starter: "<h3>My Top Friends Table</h3>\n",
+        tasks: [
+            { text: "Open and close a <table>...</table> tag", check: (c) => /<table>[\s\S]*<\/table>/i.test(c) },
+            { text: "Include header cells <th> inside a table row <tr>", check: (c) => /<tr>[\s\S]*<th>.+<\/th>[\s\S]*<\/tr>/is.test(c) },
+            { text: "Include data cells <td> inside another table row <tr>", check: (c) => /<tr>[\s\S]*<td>.+<\/td>[\s\S]*<\/tr>/is.test(c) }
+        ],
+        hint: "<table>\n  <tr><th>Rank</th><th>Friend</th></tr>\n  <tr><td>#1</td><td>Sparkle</td></tr>\n</table>"
+    },
+
+    // CHAPTER 3: FORMS
+    {
+        id: 15,
+        chapter: "3. Forms",
+        name: "Google Search Bar",
+        speech: "Time to interact with our visitors! Forms accept typing input using the <input> tag.",
+        desc: "Create a <form> containing a single text input with placeholder='Search the galaxy...' so people know what to type.",
+        starter: "<h2>Search the Web</h2>\n",
+        tasks: [
+            { text: "Create a <form>...</form> container", check: (c) => /<form>[\s\S]*<\/form>/i.test(c) },
+            { text: "Add an <input type=\"text\"> inside", check: (c) => /<form>[\s\S]*<input\s+[^>]*type=["']text["']/is.test(c) },
+            { text: "Give the input a placeholder attribute", check: (c) => /<input\s+[^>]*placeholder=["'][^"']+["']/i.test(c) }
+        ],
+        hint: '<form>\n  <input type="text" placeholder="Search the galaxy...">\n</form>'
+    },
+    {
+        id: 16,
+        chapter: "3. Forms",
+        name: "Sign Up v1",
+        speech: "Every input needs a <label> so users (and screen readers) know what to type!",
+        desc: "Build a form with an email input and a password input. Use <label for='...'> paired with matching <input id='...'>.",
+        starter: "<h3>Account Sign Up</h3>\n<form>\n</form>\n",
+        tasks: [
+            { text: "Include an <input type=\"email\">", check: (c) => /<input\s+[^>]*type=["']email["']/i.test(c) },
+            { text: "Include an <input type=\"password\">", check: (c) => /<input\s+[^>]*type=["']password["']/i.test(c) },
+            { text: "Use at least two <label> elements", check: (c) => (c.match(/<label/gi) || []).length >= 2 }
+        ],
+        hint: '<label for="em">Email:</label><input id="em" type="email">\n<label for="pw">Password:</label><input id="pw" type="password">'
+    },
+    {
+        id: 17,
+        chapter: "3. Forms",
+        name: "Sign Up v2",
+        speech: "Checkboxes let people pick multiple items, while radio buttons pick one choice!",
+        desc: "Add a checkbox (<input type='checkbox'>) for 'Agree to Rules' and two radio buttons (<input type='radio' name='plan'>) for choosing a level.",
+        starter: "<form>\n  <p>Select your tier:</p>\n</form>\n",
+        tasks: [
+            { text: "Add at least one <input type=\"checkbox\">", check: (c) => /<input\s+[^>]*type=["']checkbox["']/i.test(c) },
+            { text: "Add two <input type=\"radio\"> with the same name attribute", check: (c) => (c.match(/type=["']radio["']/gi) || []).length >= 2 && /name=["']\w+["']/i.test(c) }
+        ],
+        hint: '<input type="radio" name="tier"> Starter\n<input type="radio" name="tier"> Pro\n<input type="checkbox"> Agree to rules'
+    },
+    {
+        id: 18,
+        chapter: "3. Forms",
+        name: "RSVP",
+        speech: "Dropdown menus keep forms neat when there are many choices to pick from!",
+        desc: "Create a dropdown selector using <select>. Inside, add three <option> tags for: 'Yes', 'No', and 'Maybe'.",
+        starter: "<h3>Birthday Party RSVP</h3>\n<form>\n  <label>Will you attend?</label>\n</form>\n",
+        tasks: [
+            { text: "Create a <select>...</select> dropdown", check: (c) => /<select>[\s\S]*<\/select>/i.test(c) },
+            { text: "Add at least three <option> tags inside the select", check: (c) => (c.match(/<option/gi) || []).length >= 3 }
+        ],
+        hint: '<select><option>Yes</option><option>No</option><option>Maybe</option></select>'
+    },
+    {
+        id: 19,
+        chapter: "3. Forms",
+        name: "Contact Us",
+        speech: "When someone wants to write a long letter, regular input is too tiny. We use <textarea>!",
+        desc: "Add a <textarea> tag with rows='4' and cols='30' so users can write a paragraph of feedback.",
+        starter: "<h3>Feedback Form</h3>\n<form>\n</form>\n",
+        tasks: [
+            { text: "Add a <textarea>...</textarea> tag", check: (c) => /<textarea[\s\S]*<\/textarea>/i.test(c) },
+            { text: "Specify rows and cols attributes on the textarea", check: (c) => /rows=["']\d+["']/i.test(c) && /cols=["']\d+["']/i.test(c) }
+        ],
+        hint: '<textarea rows="4" cols="30" placeholder="Type your letter here..."></textarea>'
+    },
+    {
+        id: 20,
+        chapter: "3. Forms",
+        name: "Welp",
+        speech: "Finish the form with a Submit button so data can travel across the internet!",
+        desc: "Combine what you learned: create a complete review form with an input, a select dropdown, and a <button type='submit'>Submit</button>.",
+        starter: "<h3>Restaurant Review</h3>\n<form>\n</form>\n",
+        tasks: [
+            { text: "Contain an <input> inside the form", check: (c) => /<form>[\s\S]*<input[^>]*>[\s\S]*<\/form>/is.test(c) },
+            { text: "Contain a <select> dropdown inside", check: (c) => /<form>[\s\S]*<select>[\s\S]*<\/select>[\s\S]*<\/form>/is.test(c) },
+            { text: "Include a <button type=\"submit\">Submit</button>", check: (c) => /<button\s+[^>]*type=["']submit["'].*>.*<\/button>/is.test(c) }
+        ],
+        hint: '<form>\n  <input type="text">\n  <select><option>5 Stars</option></select>\n  <button type="submit">Submit Review</button>\n</form>'
+    },
+
+    // CHAPTER 4: SEMANTIC HTML
+    {
+        id: 21,
+        chapter: "4. Semantic HTML",
+        name: "Personal Blog",
+        speech: "Semantic tags give human meaning to the webpage structure: header, main, and footer!",
+        desc: "Lay out the primary structure of a personal blog using the three pillars: <header>, <main>, and <footer>.",
+        starter: "",
+        tasks: [
+            { text: "Add a <header> with an <h1> title inside", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<\/header>/is.test(c) },
+            { text: "Add a <main> with a <p> article body inside", check: (c) => /<main>[\s\S]*<p>.+<\/p>[\s\S]*<\/main>/is.test(c) },
+            { text: "Add a <footer> with copyright text inside", check: (c) => /<footer>[\s\S]*.+[\s\S]*<\/footer>/is.test(c) }
+        ],
+        hint: "<header><h1>My Daily Log</h1></header>\n<main><p>Today I wrote code!</p></main>\n<footer><p>&copy; 2026 Afifa</p></footer>"
+    },
+    {
+        id: 22,
+        chapter: "4. Semantic HTML",
+        name: "The Header & Nav",
+        speech: "Navigation bars tell visitors how to travel around your website using the <nav> element!",
+        desc: "Inside a <header>, create a <nav> bar holding an unordered list (<ul>) of links (<a>) pointing to Home and About.",
+        starter: "<header>\n  <h1>Adventure Land</h1>\n</header>\n",
+        tasks: [
+            { text: "Place a <nav>...</nav> tag inside <header>", check: (c) => /<header>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
+            { text: "Include at least two <a> links inside the nav", check: (c) => /<nav>[\s\S]*<a\s+[^>]*>.+<\/a>[\s\S]*<a\s+[^>]*>.+<\/a>[\s\S]*<\/nav>/is.test(c) }
+        ],
+        hint: '<nav>\n  <ul>\n    <li><a href="#">Home</a></li>\n    <li><a href="#">About</a></li>\n  </ul>\n</nav>'
+    },
+    {
+        id: 23,
+        chapter: "4. Semantic HTML",
+        name: "Main Footers",
+        speech: "Divide your main page into organized sections using the semantic <section> tag!",
+        desc: "Inside <main>, construct two distinct <section> blocks. Give each section its own <h2> heading and <p> content.",
+        starter: "<main>\n</main>\n",
+        tasks: [
+            { text: "Include at least two <section>...</section> elements", check: (c) => (c.match(/<section>/gi) || []).length >= 2 },
+            { text: "Each section must have its own <h2> heading", check: (c) => (c.match(/<section>[\s\S]*?<h2>.*?<\/h2>[\s\S]*?<\/section>/gi) || []).length >= 2 }
+        ],
+        hint: "<main>\n  <section><h2>Hobbies</h2><p>Coding and games.</p></section>\n  <section><h2>Goals</h2><p>Make cool apps.</p></section>\n</main>"
+    },
+    {
+        id: 24,
+        chapter: "4. Semantic HTML",
+        name: "Blog Posts",
+        speech: "Articles represent self-contained stories that make sense all on their own with <article>!",
+        desc: "Construct an independent <article>. Inside it, write an <h2> for the article headline, a <p> for the story, and a <time> or date notice.",
+        starter: "<main>\n</main>\n",
+        tasks: [
+            { text: "Add an <article>...</article> tag inside main", check: (c) => /<main>[\s\S]*<article>[\s\S]*<\/article>[\s\S]*<\/main>/is.test(c) },
+            { text: "Include an <h2> heading and a <p> inside the article", check: (c) => /<article>[\s\S]*<h2>.+<\/h2>[\s\S]*<p>.+<\/p>[\s\S]*<\/article>/is.test(c) }
+        ],
+        hint: "<article>\n  <h2>A Wonderful Sunday</h2>\n  <p>We built fun websites together!</p>\n</article>"
+    },
+    {
+        id: 25,
+        chapter: "4. Semantic HTML",
+        name: "Figures & Captions",
+        speech: "Photos in articles look best with proper captions using <figure> and <figcaption>!",
+        desc: "Wrap an image (<img>) inside a <figure> container, and add a descriptive text title right below it using <figcaption>.",
+        starter: "",
+        tasks: [
+            { text: "Create a <figure>...</figure> element", check: (c) => /<figure>[\s\S]*<\/figure>/is.test(c) },
+            { text: "Place an <img> tag inside the figure", check: (c) => /<figure>[\s\S]*<img\s+[^>]*>[\s\S]*<\/figure>/is.test(c) },
+            { text: "Add a <figcaption> explaining the picture", check: (c) => /<figure>[\s\S]*<figcaption>.+<\/figcaption>[\s\S]*<\/figure>/is.test(c) }
+        ],
+        hint: '<figure>\n  <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200" alt="Cat">\n  <figcaption>A cozy resting kitten.</figcaption>\n</figure>'
+    },
+    {
+        id: 26,
+        chapter: "4. Semantic HTML",
+        name: "Final Touches: Capstone Project",
+        speech: "YOU MADE IT TO THE SUMMIT! Now assemble everything into your very own Master Webpage!",
+        desc: "Capstone Challenge: Build a complete webpage featuring: <!DOCTYPE html>, a <header> with <h1>, a <nav> with links, a <main> with an <article>, a <form> with a button, and a <footer>!",
+        starter: "<!DOCTYPE html>\n<html>\n<head><title>Afifa's Showcase</title></head>\n<body>\n\n</body>\n</html>",
+        tasks: [
+            { text: "Include <header> with <h1> and a <nav>", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
+            { text: "Include <main> with at least one <article>", check: (c) => /<main>[\s\S]*<article>[\s\S]*<\/article>[\s\S]*<\/main>/is.test(c) },
+            { text: "Include a <form> containing a <button>", check: (c) => /<form>[\s\S]*<button.*>.*<\/button>[\s\S]*<\/form>/is.test(c) },
+            { text: "Include a <footer> at the bottom", check: (c) => /<footer>[\s\S]*<\/footer>/is.test(c) }
+        ],
+        hint: "Combine the pieces from previous chapters inside the <body> tag to build your grand portfolio page!"
+    }
+];
+
+// State & Persistent Storage Engine
+let state = {
+    currentIndex: 0,
+    unlockedIndex: 0,
+    userCode: {},
+    xp: 0
+};
+
+// Load saved progress from browser localStorage
+function initStorage() {
+    const saved = localStorage.getItem('afifa_quest_v2');
+    if (saved) {
+        try {
+            state = JSON.parse(saved);
+        } catch (e) {
+            console.error("Storage parse error", e);
+        }
+    }
+}
+
+function persistState() {
+    localStorage.setItem('afifa_quest_v2', JSON.stringify(state));
+}
+
+// Elements
+const chapterListEl = document.getElementById('chapter-list');
+const userEditorEl = document.getElementById('user-editor');
+const previewFrame = document.getElementById('preview-sandbox');
+const currentTitleEl = document.getElementById('current-title');
+const sparkleSayEl = document.getElementById('sparkle-say');
+const missionHeadlineEl = document.getElementById('mission-headline');
+const missionTextEl = document.getElementById('mission-text');
+const checklistEl = document.getElementById('checklist');
+const hintBoxEl = document.getElementById('hint-box');
+const statLevelEl = document.getElementById('stat-level');
+const statXpEl = document.getElementById('stat-xp');
+const toastEl = document.getElementById('toast');
+
+// Sound Synthesizer (Kid-Friendly Audio Feedback via Web Audio API)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playTone(freq, type = 'sine', duration = 0.2) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+}
+
+function playSuccessFanfare() {
+    [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+        setTimeout(() => playTone(f, 'triangle', 0.3), idx * 110);
+    });
+}
+
+function playErrorBloop() {
+    playTone(220, 'sawtooth', 0.25);
+}
+
+// Render Sidebar Navigation
+function renderSidebar() {
+    chapterListEl.innerHTML = '';
+    const chapters = {};
+
+    COURSE.forEach((lvl, idx) => {
+        if (!chapters[lvl.chapter]) chapters[lvl.chapter] = [];
+        chapters[lvl.chapter].push({ ...lvl, idx });
+    });
+
+    for (let chapName in chapters) {
+        const group = document.createElement('div');
+        group.className = 'chapter-group';
+
+        const header = document.createElement('div');
+        header.className = 'chapter-header';
+        header.innerHTML = `<span>${chapName}</span> <span>${chapters[chapName].filter(x => x.idx < state.unlockedIndex).length}/${chapters[chapName].length}</span>`;
+        group.appendChild(header);
+
+        chapters[chapName].forEach(item => {
+            const row = document.createElement('div');
+            const isCompleted = item.idx < state.unlockedIndex;
+            const isCurrent = item.idx === state.currentIndex;
+            const isLocked = item.idx > state.unlockedIndex;
+
+            row.className = `exercise-item ${isCurrent ? 'active' : ''} ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
+            row.innerHTML = `
+                <div class="badge">${isCompleted ? '✓' : (item.idx + 1)}</div>
+                <span>Ex ${item.id}: ${item.name}</span>
+            `;
+
+            if (!isLocked) {
+                row.onclick = () => selectExercise(item.idx);
+            }
+            group.appendChild(row);
+        });
+
+        chapterListEl.appendChild(group);
+    }
+
+    statLevelEl.innerText = state.currentIndex + 1;
+    statXpEl.innerText = state.xp;
+}
+
+// Select & Load an Exercise
+function selectExercise(idx) {
+    state.currentIndex = idx;
+    const cur = COURSE[idx];
+
+    currentTitleEl.innerText = `${cur.chapter} • Exercise ${cur.id}: ${cur.name}`;
+    sparkleSayEl.innerText = cur.speech;
+    missionHeadlineEl.innerText = `Exercise ${cur.id}: ${cur.name}`;
+    missionTextEl.innerText = cur.desc;
+    hintBoxEl.style.display = 'none';
+    hintBoxEl.innerText = cur.hint;
+
+    // Load saved code or default starter
+    const savedCode = state.userCode[idx] !== undefined ? state.userCode[idx] : cur.starter;
+    userEditorEl.value = savedCode;
+
+    updateChecklist();
+    updateLivePreview();
+    renderSidebar();
+    persistState();
+}
+
+// Check Tasks Status Real-Time
+function updateChecklist() {
+    const cur = COURSE[state.currentIndex];
+    const code = userEditorEl.value;
+    checklistEl.innerHTML = '';
+
+    cur.tasks.forEach(t => {
+        const passed = t.check(code);
+        const li = document.createElement('li');
+        li.className = `task-item ${passed ? 'complete' : ''}`;
+        li.innerHTML = `
+            <div class="task-checkbox">${passed ? '✓' : ''}</div>
+            <span>${t.text}</span>
+        `;
+        checklistEl.appendChild(li);
+    });
+}
+
+// Real-time Preview Engine
+function updateLivePreview() {
+    const code = userEditorEl.value;
+    const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    doc.open();
+    doc.write(code);
+    doc.close();
+}
+
+userEditorEl.addEventListener('input', () => {
+    state.userCode[state.currentIndex] = userEditorEl.value;
+    updateLivePreview();
+    updateChecklist();
+    persistState();
+});
+
+// Run Code & Validation Check
+function evaluateCode() {
+    const cur = COURSE[state.currentIndex];
+    const code = userEditorEl.value;
+
+    let failedTask = null;
+    for (let t of cur.tasks) {
+        if (!t.check(code)) {
+            failedTask = t;
+            break;
+        }
+    }
+
+    if (failedTask) {
+        playErrorBloop();
+        showToast(`Keep going! You still need to: ${failedTask.text}`);
+        sparkleSayEl.innerText = `Don't worry, Afifa! Check the checklist on the left and give it another try! 🌟`;
+    } else {
+        // Passed Level
+        playSuccessFanfare();
+        fireConfettiCannon();
+
+        if (state.currentIndex === state.unlockedIndex && state.unlockedIndex < COURSE.length - 1) {
+            state.unlockedIndex++;
+            state.xp += 50;
+        }
+
+        persistState();
+        renderSidebar();
+
+        const celebrationScreen = document.getElementById('celebration-screen');
+        const celebrationMsg = document.getElementById('celebration-msg');
+        celebrationMsg.innerText = `You conquered Exercise ${cur.id}: ${cur.name}! Sparkle is dancing with joy!`;
+        celebrationScreen.style.display = 'flex';
+    }
+}
+
+function advanceLevel() {
+    document.getElementById('celebration-screen').style.display = 'none';
+    if (state.currentIndex < COURSE.length - 1) {
+        selectExercise(state.currentIndex + 1);
+    } else {
+        alert("🎉 INCREDIBLE MILESTONE! Afifa has completed the entire HTML Academy! You are officially ready for CSS styling!");
+    }
+}
+
+function toggleHint() {
+    hintBoxEl.style.display = hintBoxEl.style.display === 'block' ? 'none' : 'block';
+}
+
+function resetEditor() {
+    if (confirm("Reset code back to the starting template?")) {
+        userEditorEl.value = COURSE[state.currentIndex].starter;
+        state.userCode[state.currentIndex] = userEditorEl.value;
+        updateLivePreview();
+        updateChecklist();
+        persistState();
+    }
+}
+
+function showToast(msg) {
+    toastEl.innerText = msg;
+    toastEl.style.display = 'block';
+    setTimeout(() => { toastEl.style.display = 'none'; }, 4000);
+}
+
+// Confetti Cannon
+function fireConfettiCannon() {
+    const count = 200;
+    const defaults = { origin: { y: 0.7 } };
+
+    function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+        }));
+    }
+
+    fire(0.25, { spread: 26, startVelocity: 55 });
+    fire(0.2, { spread: 60 });
+    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+    fire(0.1, { spread: 120, startVelocity: 45 });
+}
+
+// Initialize Application
+initStorage();
+selectExercise(state.currentIndex);
+</script>
+
+</body>
+</html>
