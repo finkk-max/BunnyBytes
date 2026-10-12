@@ -22,12 +22,7 @@
             --white: #ffffff;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
 
         body {
             font-family: 'Fredoka', cursive, sans-serif;
@@ -43,14 +38,8 @@
             overflow: hidden;
         }
 
-        /* App Shell */
-        #app {
-            display: flex;
-            width: 100vw;
-            height: 100vh;
-        }
+        #app { display: flex; width: 100vw; height: 100vh; }
 
-        /* Sidebar Navigation */
         #sidebar {
             width: 340px;
             background: var(--white);
@@ -96,11 +85,7 @@
             color: var(--purple-border);
         }
 
-        .syllabus-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 14px 12px;
-        }
+        .syllabus-scroll { flex: 1; overflow-y: auto; padding: 14px 12px; }
 
         .chapter-group {
             margin-bottom: 18px;
@@ -133,121 +118,55 @@
             transition: all 0.15s ease;
         }
 
-        .exercise-item:hover:not(.locked) {
-            background: var(--purple-light);
-        }
-
-        .exercise-item.active {
-            background: #ffecb3;
-            color: #d84315;
-            border-left: 6px solid var(--amber);
-        }
-
-        .exercise-item.locked {
-            opacity: 0.45;
-            cursor: not-allowed;
-            color: #78909c;
-        }
-
-        .exercise-item.completed .badge {
-            background: var(--mint-green);
-            color: white;
-            border-color: var(--mint-deep);
-        }
+        .exercise-item:hover:not(.locked) { background: var(--purple-light); }
+        .exercise-item.active { background: #ffecb3; color: #d84315; border-left: 6px solid var(--amber); }
+        .exercise-item.locked { opacity: 0.45; cursor: not-allowed; color: #78909c; }
+        .exercise-item.completed .badge { background: var(--mint-green); color: white; border-color: var(--mint-deep); }
 
         .badge {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            border: 2px solid #b0bec5;
-            font-size: 0.75rem;
-            font-weight: 700;
-            flex-shrink: 0;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: white; border: 2px solid #b0bec5;
+            font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
         }
 
-        /* Main Workspace */
-        #workspace {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+        #workspace { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* Top Stage Banner */
         #topbar {
-            height: 64px;
-            background: white;
-            border-bottom: 4px solid var(--purple-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
+            height: 64px; background: white; border-bottom: 4px solid var(--purple-border);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
         }
 
-        .current-tag {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--purple-border);
-        }
+        .current-tag { font-size: 1.25rem; font-weight: 700; color: var(--purple-border); }
+        .action-tools { display: flex; gap: 10px; }
 
-        .action-tools {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* Split Stage Panels */
+        /* Standard 3-Column Grid */
         #stage-grid {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 380px 1fr 1fr;
-            gap: 16px;
-            padding: 16px;
-            overflow: hidden;
+            flex: 1; display: grid; grid-template-columns: 350px 1fr 1fr;
+            gap: 16px; padding: 16px; overflow: hidden;
         }
 
-        /* Card Container Styles */
         .stage-box {
-            background: white;
-            border: 4px solid var(--purple-border);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 8px 0 rgba(123, 31, 162, 0.15);
+            background: white; border: 4px solid var(--purple-border);
+            border-radius: 20px; display: flex; flex-direction: column;
+            overflow: hidden; box-shadow: 0 8px 0 rgba(123, 31, 162, 0.15);
         }
 
         .stage-box-header {
-            padding: 10px 16px;
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 10px 16px; font-weight: 700; font-size: 1rem;
+            display: flex; align-items: center; justify-content: space-between;
             border-bottom: 3px solid #eee;
         }
 
-        /* Lesson & Mascot Panel */
-        #panel-instructions {
-            background: #fffdfd;
-        }
+        #panel-instructions { background: #fffdfd; }
 
         .mascot-stage {
-            padding: 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--pink-soft);
-            border-bottom: 3px dashed #f48fb1;
+            padding: 14px; display: flex; align-items: center; gap: 12px;
+            background: var(--pink-soft); border-bottom: 3px dashed #f48fb1;
         }
 
         .bunny-svg {
-            width: 78px;
-            height: 78px;
-            flex-shrink: 0;
+            width: 78px; height: 78px; flex-shrink: 0;
             filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
             animation: rabbitFloat 3s ease-in-out infinite;
         }
@@ -258,235 +177,90 @@
         }
 
         .dialogue-balloon {
-            background: white;
-            border: 3px solid var(--pink-accent);
-            border-radius: 16px;
-            border-bottom-left-radius: 4px;
-            padding: 10px 12px;
-            font-size: 0.95rem;
-            line-height: 1.35;
-            color: #37474f;
-            position: relative;
+            background: white; border: 3px solid var(--pink-accent);
+            border-radius: 16px; border-bottom-left-radius: 4px;
+            padding: 10px 12px; font-size: 0.95rem; line-height: 1.35;
+            color: #37474f; position: relative;
         }
 
-        .mission-body {
-            padding: 16px;
-            overflow-y: auto;
-            flex: 1;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .mission-body h3 {
-            color: var(--pink-deep);
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .mission-desc {
-            margin-bottom: 14px;
-            color: #455a64;
-            white-space: pre-wrap;
-        }
+        .mission-body { padding: 16px; overflow-y: auto; flex: 1; font-size: 1.05rem; line-height: 1.5; }
+        .mission-body h3 { color: var(--pink-deep); margin-bottom: 8px; font-size: 1.2rem; }
+        .mission-desc { margin-bottom: 14px; color: #263238; white-space: pre-wrap; font-size: 1.1rem; }
 
         .tasks-box {
-            background: #f1f8e9;
-            border: 2px solid #aed581;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 14px;
+            background: #f1f8e9; border: 2px solid #aed581;
+            border-radius: 12px; padding: 12px; margin-bottom: 14px;
         }
 
         .tasks-box h4 {
-            color: #33691e;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #33691e; font-size: 1rem; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        .task-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .task-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+        .task-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .task-item { display: flex; align-items: flex-start; gap: 10px; font-size: 1rem; font-weight: 600; color: #1b5e20; }
 
         .task-checkbox {
-            width: 18px;
-            height: 18px;
-            border-radius: 6px;
-            border: 2px solid #689f38;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            background: white;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-top: 2px;
+            width: 22px; height: 22px; border-radius: 6px;
+            border: 2px solid #689f38; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; background: white; color: white;
+            font-size: 0.8rem; font-weight: 700; margin-top: 1px;
         }
 
-        .task-item.complete .task-checkbox {
-            background: var(--mint-green);
-            border-color: var(--mint-deep);
-        }
+        .task-item.complete .task-checkbox { background: var(--mint-green); border-color: var(--mint-deep); }
 
         .hint-drawer {
-            margin-top: 10px;
-            padding: 10px 12px;
-            background: #fff8e1;
-            border: 2px dashed #ffe082;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            color: #795548;
-            display: none;
+            margin-top: 10px; padding: 12px; background: #fff8e1;
+            border: 2px dashed #ffe082; border-radius: 10px;
+            font-size: 1.1rem; color: #d84315; display: none;
+            white-space: pre-wrap; font-family: 'Fira Code', monospace; font-weight: bold;
         }
 
-        /* Code Editor Panel */
-        #panel-editor {
-            position: relative;
-        }
+        #panel-editor { position: relative; }
 
         .code-textarea {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-            border: none;
-            padding: 16px;
-            font-family: 'Fira Code', monospace;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            background: #282a36;
-            color: #f8f8f2;
-            resize: none;
-            outline: none;
-            user-select: text;
+            flex: 1; width: 100%; height: 100%; border: none; padding: 16px;
+            font-family: 'Fira Code', monospace; font-size: 1.25rem; line-height: 1.6;
+            background: #282a36; color: #f8f8f2; resize: none; outline: none; user-select: text;
         }
 
-        /* Preview Panel */
-        #panel-preview {
-            background: #ffffff;
-        }
+        #panel-preview { background: #ffffff; }
+        .preview-frame-wrap { flex: 1; width: 100%; height: 100%; background: white; overflow: auto; }
+        iframe { width: 100%; height: 100%; border: none; background: white; }
 
-        .preview-frame-wrap {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-            background: white;
-            overflow: auto;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: white;
-        }
-
-        /* Buttons & Utility Controls */
         .cartoon-btn {
-            font-family: 'Fredoka', cursive, sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 8px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 3px solid var(--dark-ink);
-            box-shadow: 0 4px 0 var(--dark-ink);
-            transition: all 0.08s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            font-family: 'Fredoka', cursive, sans-serif; font-weight: 700;
+            font-size: 1.1rem; padding: 8px 18px; border-radius: 12px; cursor: pointer;
+            border: 3px solid var(--dark-ink); box-shadow: 0 4px 0 var(--dark-ink);
+            transition: all 0.08s ease; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
         }
 
-        .cartoon-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 var(--dark-ink);
-        }
+        .cartoon-btn:active { transform: translateY(4px); box-shadow: 0 0 0 var(--dark-ink); }
+        .btn-check { background: var(--mint-green); color: #003300; }
+        .btn-hint { background: var(--amber); color: #3e2723; }
+        .btn-reset { background: #eeeeee; color: #424242; font-size: 0.95rem; padding: 6px 12px; }
 
-        .btn-check {
-            background: var(--mint-green);
-            color: #003300;
-        }
-
-        .btn-hint {
-            background: var(--amber);
-            color: #3e2723;
-        }
-
-        .btn-reset {
-            background: #eeeeee;
-            color: #424242;
-            font-size: 0.85rem;
-            padding: 6px 12px;
-        }
-
-        /* Celebration Screen Overlay */
         #celebration-screen {
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.94);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            text-align: center;
-            padding: 24px;
+            position: fixed; inset: 0; background: rgba(255, 255, 255, 0.94);
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1000; text-align: center; padding: 24px;
         }
 
-        #celebration-screen h2 {
-            font-size: 3.2rem;
-            color: var(--pink-deep);
-            margin: 15px 0 10px;
-            text-shadow: 3px 3px 0 #ffd7e8;
-        }
+        #celebration-screen h2 { font-size: 3.5rem; color: var(--pink-deep); margin: 15px 0 10px; text-shadow: 3px 3px 0 #ffd7e8; }
+        #celebration-screen p { font-size: 1.6rem; color: #455a64; max-width: 550px; margin-bottom: 25px; font-weight: bold; }
 
-        #celebration-screen p {
-            font-size: 1.4rem;
-            color: #455a64;
-            max-width: 550px;
-            margin-bottom: 25px;
-        }
-
-        .big-bunny {
-            width: 170px;
-            height: 170px;
-            animation: rabbitCelebrate 0.8s infinite alternate ease-in-out;
-        }
+        .big-bunny { width: 170px; height: 170px; animation: rabbitCelebrate 0.8s infinite alternate ease-in-out; }
 
         @keyframes rabbitCelebrate {
             from { transform: scale(1) rotate(-4deg); }
             to { transform: scale(1.1) rotate(4deg); }
         }
 
-        /* Feedback Toast */
         #toast {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: #ff5252;
-            color: white;
-            border: 3px solid #b71c1c;
-            box-shadow: 0 6px 0 #b71c1c;
-            padding: 12px 20px;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 600;
-            display: none;
-            z-index: 999;
-            animation: bounceShake 0.4s ease;
+            position: fixed; bottom: 24px; right: 24px; background: #ff5252;
+            color: white; border: 3px solid #b71c1c; box-shadow: 0 6px 0 #b71c1c;
+            padding: 16px 24px; border-radius: 14px; font-size: 1.2rem; font-weight: bold;
+            display: none; z-index: 999; animation: bounceShake 0.4s ease;
         }
 
         @keyframes bounceShake {
@@ -494,12 +268,28 @@
             50% { transform: translateY(-6px); }
             100% { transform: translateY(0); }
         }
+
+        /* 📱 IPAD & TABLET OPTIMIZATION */
+        @media (max-width: 1200px) {
+            #sidebar { width: 260px; }
+            .brand-header h1 { font-size: 1.2rem; }
+            .current-tag { font-size: 1.1rem; }
+            #stage-grid {
+                grid-template-columns: 320px 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 12px;
+                padding: 12px;
+            }
+            #panel-instructions { grid-column: 1; grid-row: 1 / 3; }
+            #panel-editor { grid-column: 2; grid-row: 1; }
+            #panel-preview { grid-column: 2; grid-row: 2; }
+            .code-textarea { font-size: 1.35rem; }
+        }
     </style>
 </head>
 <body>
 
 <div id="app">
-    <!-- Syllabus Sidebar -->
     <aside id="sidebar">
         <div class="brand-header">
             <h1><span>🐰</span> Afifa's Code Quest</h1>
@@ -508,14 +298,10 @@
             <div class="stat-pill">Level <span id="stat-level">1</span>/26</div>
             <div class="stat-pill">✨ <span id="stat-xp">0</span> XP</div>
         </div>
-        <div class="syllabus-scroll" id="chapter-list">
-            <!-- Dynamically populated from course database -->
-        </div>
+        <div class="syllabus-scroll" id="chapter-list"></div>
     </aside>
 
-    <!-- Main Coding Playground -->
     <main id="workspace">
-        <!-- Top Control Bar -->
         <header id="topbar">
             <div class="current-tag" id="current-title">Chapter 1: Elements &bull; Exercise 1</div>
             <div class="action-tools">
@@ -525,9 +311,7 @@
             </div>
         </header>
 
-        <!-- 3-Column Split Stage -->
         <div id="stage-grid">
-            <!-- Col 1: Sparkle & Instructions -->
             <section class="stage-box" id="panel-instructions">
                 <div class="mascot-stage">
                     <svg class="bunny-svg" viewBox="0 0 100 100">
@@ -546,39 +330,31 @@
                         <path d="M 44 68 Q 50 74 56 68" fill="none" stroke="#263238" stroke-width="2.5" stroke-linecap="round"/>
                     </svg>
                     <div class="dialogue-balloon" id="sparkle-say">
-                        Hello Afifa! Let's explore the world of code together!
+                        Hi Afifa! Let's code together!
                     </div>
                 </div>
 
                 <div class="mission-body">
-                    <h3 id="mission-headline">Mission Overview</h3>
-                    <div class="mission-desc" id="mission-text">
-                        Loading challenge details...
-                    </div>
-
+                    <h3 id="mission-headline">Mission</h3>
+                    <div class="mission-desc" id="mission-text">Loading...</div>
                     <div class="tasks-box">
-                        <h4>Missions Checklist:</h4>
-                        <ul class="task-list" id="checklist">
-                            <!-- Tasks injected dynamically -->
-                        </ul>
+                        <h4>To Do:</h4>
+                        <ul class="task-list" id="checklist"></ul>
                     </div>
-
                     <div class="hint-drawer" id="hint-box"></div>
                 </div>
             </section>
 
-            <!-- Col 2: Code Editor -->
             <section class="stage-box" id="panel-editor">
                 <div class="stage-box-header" style="background: #21222c; color: #f8f8f2; border-bottom: 2px solid #44475a;">
-                    <span>⌨️ Code Editor (index.html)</span>
+                    <span>⌨️ Code Editor</span>
                 </div>
-                <textarea class="code-textarea" id="user-editor" spellcheck="false" placeholder="Write HTML tags here..."></textarea>
+                <textarea class="code-textarea" id="user-editor" spellcheck="false" placeholder="Write code here..."></textarea>
             </section>
 
-            <!-- Col 3: Live Preview -->
             <section class="stage-box" id="panel-preview">
                 <div class="stage-box-header" style="background: #e8f5e9; color: #1b5e20;">
-                    <span>📺 Live Browser Preview</span>
+                    <span>📺 Live Screen</span>
                 </div>
                 <div class="preview-frame-wrap">
                     <iframe id="preview-sandbox"></iframe>
@@ -588,7 +364,6 @@
     </main>
 </div>
 
-<!-- Success Popup Modal -->
 <div id="celebration-screen">
     <svg class="big-bunny" viewBox="0 0 100 100">
         <ellipse cx="32" cy="24" rx="9" ry="24" fill="#ffffff" stroke="#263238" stroke-width="3" transform="rotate(-15 32 24)"/>
@@ -603,405 +378,320 @@
         <polygon points="50,65 44,62 56,62" fill="#ff4081"/>
         <path d="M 42 70 Q 50 82 58 70" fill="#ff4081" stroke="#263238" stroke-width="2.5"/>
     </svg>
-    <h2>SUPERSTAR CODER! 🌟</h2>
-    <p id="celebration-msg">You solved all the puzzles in this lesson!</p>
-    <button class="cartoon-btn btn-check" style="font-size: 1.4rem; padding: 14px 34px;" onclick="advanceLevel()">Continue Journey 🚀</button>
+    <h2>GREAT JOB! 🌟</h2>
+    <p id="celebration-msg">You did it!</p>
+    <button class="cartoon-btn btn-check" style="font-size: 1.5rem; padding: 16px 40px;" onclick="advanceLevel()">Next Lesson 🚀</button>
 </div>
 
-<!-- Warning / Error Toast -->
 <div id="toast"></div>
 
 <script>
 const COURSE = [
-    // CHAPTER 1: ELEMENTS
     {
-        id: 1,
-        chapter: "1. Elements",
-        name: "The Magic Building Blocks",
-        speech: "Welcome to the magical world of coding, Afifa! Every website you visit is built using secret magic blocks called HTML.",
-        desc: "Imagine the internet is a giant, blank piece of paper. To put pictures, words, and games on it, we use HTML tags. Think of tags like digital Lego bricks! When you type a tag, the computer reads it and builds exactly what you ask for.\n\nToday, you are the Master Builder! Let's build your very first webpage by snapping together a giant title block (<h1>) and a little story block (<p>).",
-        starter: "<!-- Type your heading and paragraph below -->\n",
-        tasks: [
-            { text: "Add an <h1> heading that contains text", check: (c) => /<h1>.+<\/h1>/is.test(c) },
-            { text: "Add a <p> paragraph right underneath", check: (c) => /<p>.+<\/p>/is.test(c) }
-        ],
-        hint: "Type: <h1>Shooting Star!</h1> followed by <p>I wish for magic skills.</p>"
-    },
-    {
-        id: 2,
-        chapter: "1. Elements",
-        name: "The Three Bears of Text",
-        speech: "Headings are like the Three Bears! Papa Bear is <h1> (the biggest), Mama Bear is <h2>, and Baby Bear is <h3>.",
-        desc: "If every word on a webpage was the exact same size, reading it would be super boring! Headings help us shout out the most important topics.\n\nThe <h1> is the giant book title. The <h2> is a chapter title. The <h3> is a tiny note. Can you organize our ocean story using all three sizes?",
-        starter: "<h1>The Ocean World</h1>\n",
-        tasks: [
-            { text: "Keep the <h1> heading for the main title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
-            { text: "Create an <h2> heading for the subtitle", check: (c) => /<h2>.+<\/h2>/is.test(c) },
-            { text: "Create an <h3> heading for the minor topic", check: (c) => /<h3>.+<\/h3>/is.test(c) }
-        ],
-        hint: "Add <h2>Friendly Dolphins</h2> and <h3>Tiny Coral Reefs</h3> below the h1."
-    },
-    {
-        id: 3,
-        chapter: "1. Elements",
-        name: "The Magic Line & The Big Jump",
-        speech: "Sometimes words get too crowded! Let's use <hr> to draw a magic line, and <br> to make our words jump to a new line.",
-        desc: "When you write a newspaper, you don't want the sports news to crash into the weather news! \n\nThe <hr> tag draws a solid line across the page to keep things separated. The <br> tag is like pressing 'Enter' on a keyboard—it forces the words to jump down so they don't squish together.",
-        starter: "<p>Morning News edition.</p>\n",
-        tasks: [
-            { text: "Have at least two separate <p> paragraphs", check: (c) => (c.match(/<p>/gi) || []).length >= 2 && (c.match(/<\/p>/gi) || []).length >= 2 },
-            { text: "Add a line-break <br> inside a paragraph", check: (c) => /<br\s*\/?>/i.test(c) },
-            { text: "Put a horizontal rule line <hr> between items", check: (c) => /<hr\s*\/?>/i.test(c) }
-        ],
-        hint: "Put <hr> between your two paragraphs, and put <br> inside your sentence to jump to a new line!"
-    },
-    {
-        id: 4,
-        chapter: "1. Elements",
-        name: "Shouting and Whispering",
-        speech: "Let's give our words some emotion! <strong> makes words flex their muscles, and <em> makes them lean in for a whisper.",
-        desc: "When we talk, we sometimes say things REALLY LOUD or with *special feeling*. Computers don't have voices, so we have to tell them how a word sounds.\n\nWrapping a word in <strong> makes it bold and strong. Wrapping it in <em> emphasizes it by making it italic (slanted)!",
-        starter: "<p>Learning code is fun and exciting!</p>\n",
-        tasks: [
-            { text: "Wrap a word inside <strong>...</strong>", check: (c) => /<strong>.+<\/strong>/is.test(c) },
-            { text: "Wrap a word inside <em>...</em>", check: (c) => /<em>.+<\/em>/is.test(c) },
-            { text: "Keep everything neatly inside a <p> tag", check: (c) => /<p>.*<strong>.*<\/p>/is.test(c) || /<p>.*<em>.*<\/p>/is.test(c) }
-        ],
-        hint: "Try: <p>Learning code is <strong>super</strong> and <em>magical</em>!</p>"
-    },
-    {
-        id: 5,
-        chapter: "1. Elements",
-        name: "The Recipe Book",
-        speech: "Chefs need lists to bake cakes! We have dot lists (<ul>) for ingredients, and number lists (<ol>) for the steps.",
-        desc: "If a robot was baking a cake, it needs to know what order to do things in. \n\nAn <ol> (Ordered List) uses numbers like 1, 2, 3 so the robot doesn't bake the cake before mixing the flour! A <ul> (Unordered List) uses bullet dots, which is perfect for a shopping list where the order doesn't matter.",
-        starter: "<h3>Baking Cupcakes</h3>\n",
-        tasks: [
-            { text: "Build an unordered list <ul> with at least two <li> items", check: (c) => /<ul>\s*(<li>.*?<\/li>\s*){2,}<\/ul>/is.test(c) },
-            { text: "Build an ordered list <ol> with at least two <li> items", check: (c) => /<ol>\s*(<li>.*?<\/li>\s*){2,}<\/ol>/is.test(c) }
-        ],
-        hint: "Use <ul><li>Flour</li><li>Sugar</li></ul> and then <ol><li>Mix</li><li>Bake</li></ol>."
-    },
-    {
-        id: 6,
-        chapter: "1. Elements",
-        name: "Painting a Picture",
-        speech: "Words are great, but pictures are fun! The <img> tag acts like a magical painting canvas.",
-        desc: "When you put an <img> tag on a page, it's totally blank! It needs a source (`src`) to tell it exactly which photo to fetch from the internet.\n\nWe also add an `alt` description. This is super important because if a blind person visits your website, their computer will read the `alt` text out loud so they can imagine the picture!",
-        starter: "<h2>Lost Puppy Flyer</h2>\n<p>Please call if you find our little companion!</p>\n",
-        tasks: [
-            { text: "Insert an <img> tag", check: (c) => /<img\s+[^>]*>/i.test(c) },
-            { text: "Provide a src attribute with a URL", check: (c) => /<img\s+[^>]*src=["'][^"']+["']/i.test(c) },
-            { text: "Include an alt attribute explaining the picture", check: (c) => /<img\s+[^>]*alt=["'][^"']+["']/i.test(c) }
-        ],
-        hint: 'Use: <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=200" alt="Cute puppy">'
-    },
-    {
-        id: 7,
-        chapter: "1. Elements",
-        name: "The Magic Portal",
-        speech: "Links are the superpowers of the web! An <a> tag creates a glowing portal that teleports you to another website.",
-        desc: "Before links were invented, you had to memorize long, boring web addresses. The Anchor tag (`<a>`) changed the world by letting us click a word to travel instantly!\n\nYou give it an `href` to tell it where the portal goes, and `target='_blank'` makes sure it safely opens in a brand new tab so they don't lose your page.",
-        starter: "<h2>My Favorite Music</h2>\n<p>Click below to visit the band page:</p>\n",
-        tasks: [
-            { text: "Create an anchor <a>...</a> tag with clickable words", check: (c) => /<a\s+[^>]*>.+<\/a>/is.test(c) },
-            { text: "Include an href attribute pointing to a website", check: (c) => /<a\s+[^>]*href=["']https?:\/\/[^"']+["']/i.test(c) },
-            { text: "Set target=\"_blank\" so the link opens safely", check: (c) => /<a\s+[^>]*target=["']_blank["']/i.test(c) }
-        ],
-        hint: '<a href="https://wikipedia.org" target="_blank">Visit Encyclopedia</a>'
-    },
-
-    // CHAPTER 2: STRUCTURE
-    {
-        id: 8,
-        chapter: "2. Structure",
-        name: "Building the House",
-        speech: "Every true HTML page is built like a house! It needs a foundation, a brain, and a living room.",
-        desc: "Computers are very strict. If you just throw tags on a page, they get confused! \n\nWe start with `<!DOCTYPE html>` so the computer knows we are speaking modern HTML. Then we wrap the whole house in `<html>`. The `<head>` is the brain (it holds the title), and the `<body>` is the living room where all your visible text and pictures go!",
+        id: 1, chapter: "1. Words", name: "Big Titles",
+        speech: "Let's make a big title!",
+        desc: "<h1> makes a BIG title.\n<p> makes a normal sentence.",
         starter: "",
         tasks: [
-            { text: "Start with <!DOCTYPE html>", check: (c) => /<!DOCTYPE\s+html>/i.test(c) },
-            { text: "Wrap everything in <html>...</html>", check: (c) => /<html>[\s\S]*<\/html>/i.test(c) },
-            { text: "Add <head><title>My Page</title></head>", check: (c) => /<head>[\s\S]*<title>.+<\/title>[\s\S]*<\/head>/i.test(c) },
-            { text: "Add a <body> tag with text content", check: (c) => /<body>[\s\S]*.+[\s\S]*<\/body>/i.test(c) }
+            { text: "Make an <h1> title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
+            { text: "Make a <p> sentence", check: (c) => /<p>.+<\/p>/is.test(c) }
         ],
-        hint: "<!DOCTYPE html>\n<html>\n<head><title>Quest</title></head>\n<body><p>Hello!</p></body>\n</html>"
+        hint: "<h1>My Star</h1>\n<p>I love magic.</p>"
     },
     {
-        id: 9,
-        chapter: "2. Structure",
-        name: "Russian Nesting Dolls",
-        speech: "Tags can have children! Putting an element inside another element is like safely nesting wooden dolls.",
-        desc: "When we nest tags, the golden rule is: the last tag you open MUST be the first tag you close! \n\nIf you open a `<p>`, then open a `<strong>`, you have to close the `</strong>` BEFORE you close the `</p>`. If you cross them up, the computer gets a tummy ache and the page breaks.",
-        starter: "<p>The treasure is hidden in the secret castle.</p>\n",
-        tasks: [
-            { text: "Nest a <strong> inside the <p> tag", check: (c) => /<p>.*<strong>.*<\/strong>.*<\/p>/is.test(c) },
-            { text: "Nest a <span> inside the <strong> tag", check: (c) => /<strong>.*<span>.*<\/span>.*<\/strong>/is.test(c) }
-        ],
-        hint: "<p>The treasure is <strong><span>deep inside</span></strong> the castle.</p>"
-    },
-    {
-        id: 10,
-        chapter: "2. Structure",
-        name: "The Cardboard Box",
-        speech: "The <div> tag is an invisible cardboard box! It helps us group toys together on a shelf.",
-        desc: "If you have a picture of a bicycle, the price, and a buy button, you don't want them floating away from each other on a big webpage.\n\nWe use a `<div>` (Divider) to draw an invisible box around them. That way, if we want to move the bicycle to the other side of the screen later, all three pieces move together as a team!",
-        starter: "<!-- Build your product card inside a div -->\n",
-        tasks: [
-            { text: "Open and close a <div>...</div> container", check: (c) => /<div>[\s\S]*<\/div>/i.test(c) },
-            { text: "Place an <h2> heading inside the div", check: (c) => /<div>[\s\S]*<h2>.+<\/h2>[\s\S]*<\/div>/is.test(c) },
-            { text: "Place a <p> and a <button> inside the same div", check: (c) => /<div>[\s\S]*<p>.+<\/p>[\s\S]*<button>.+<\/button>[\s\S]*<\/div>/is.test(c) }
-        ],
-        hint: "<div><h2>Bicycle</h2><p>Price: \$20</p><button>Buy</button></div>"
-    },
-    {
-        id: 11,
-        chapter: "2. Structure",
-        name: "The Magic Highlighter",
-        speech: "A <div> creates a big block, but a <span> is tiny! It lets us wrap a single word without moving it to a new line.",
-        desc: "Imagine you are writing a sentence and want just ONE word to be purple. If you put that word in a `<div>` or a `<p>`, it will accidentally break your sentence into three different lines!\n\nThe `<span>` tag is a tiny, polite wrapper that sits quietly right in the middle of a sentence, perfect for adding special colors to single words.",
-        starter: "<p>The red fox is a clever woodland creature.</p>\n",
-        tasks: [
-            { text: "Include a <span>...</span> tag inside the paragraph", check: (c) => /<p>.*<span>.+<\/span>.*<\/p>/is.test(c) },
-            { text: "Give the span a style attribute (e.g., color: purple;)", check: (c) => /<span\s+style=["'][^"']+["']>/i.test(c) }
-        ],
-        hint: '<p>The fox is <span style="color: purple;">Vulpes vulpes</span> in Latin.</p>'
-    },
-    {
-        id: 12,
-        chapter: "2. Structure",
-        name: "Sports Team Uniforms",
-        speech: "Classes are like sports uniforms! You can give the exact same 'class' name to lots of different tags.",
-        desc: "If we have ten paragraphs and we want three of them to have blue backgrounds, it would take forever to style them one by one.\n\nInstead, we give those three paragraphs a `class=\"blue-team\"`. Later on, we can tell the computer: 'Hey, everyone wearing the blue-team uniform gets a blue background!' Let's hand out some uniforms.",
-        starter: "<p>First paragraph.</p>\n<p>Second paragraph.</p>\n",
-        tasks: [
-            { text: "Give the first <p> class=\"lead-story\"", check: (c) => /<p\s+[^>]*class=["']lead-story["']/i.test(c) },
-            { text: "Give the second <p> class=\"lead-story\" as well", check: (c) => (c.match(/class=["']lead-story["']/gi) || []).length >= 2 }
-        ],
-        hint: '<p class="lead-story">Story 1</p>\n<p class="lead-story">Story 2</p>'
-    },
-    {
-        id: 13,
-        chapter: "2. Structure",
-        name: "The Secret Identity",
-        speech: "While many elements can share a class, an ID is a secret superhero identity! It must be 100% unique.",
-        desc: "Think of a class like a school uniform, but an ID is your actual fingerprint. No two tags on a webpage are EVER allowed to have the same ID.\n\nWe use IDs when a tag is so important that the computer needs to find it instantly, like the main 'Submit' button or the very top of the page.",
+        id: 2, chapter: "1. Words", name: "Bear Sizes",
+        speech: "Titles have sizes, just like bears!",
+        desc: "<h1> is BIG!\n<h2> is medium!\n<h3> is small!",
         starter: "",
         tasks: [
-            { text: "Create a div with id=\"red-ranger\"", check: (c) => /<div\s+[^>]*id=["']red-ranger["']/i.test(c) },
-            { text: "Create a div with id=\"blue-ranger\"", check: (c) => /<div\s+[^>]*id=["']blue-ranger["']/i.test(c) },
-            { text: "Create a div with id=\"yellow-ranger\"", check: (c) => /<div\s+[^>]*id=["']yellow-ranger["']/i.test(c) }
+            { text: "Make an <h1> title", check: (c) => /<h1>.+<\/h1>/is.test(c) },
+            { text: "Make an <h2> title", check: (c) => /<h2>.+<\/h2>/is.test(c) },
+            { text: "Make an <h3> title", check: (c) => /<h3>.+<\/h3>/is.test(c) }
         ],
-        hint: '<div id="red-ranger">Red</div>\n<div id="blue-ranger">Blue</div>\n<div id="yellow-ranger">Yellow</div>'
+        hint: "<h1>The Ocean</h1>\n<h2>Dolphins</h2>\n<h3>Fish</h3>"
     },
     {
-        id: 14,
-        chapter: "2. Structure",
-        name: "The Neat Bookshelf",
-        speech: "Tables are like magical bookshelves! They display information perfectly in rows and columns.",
-        desc: "Before modern layouts were invented, people built entire websites using tables! Today, we use them for things that look like spreadsheets or leaderboards.\n\nThe `<table>` is the whole shelf. A `<tr>` is a flat Row across the shelf. A `<th>` is a bold Header column, and `<td>` holds the actual Data in the little cubbies!",
-        starter: "<h3>My Top Friends Table</h3>\n",
-        tasks: [
-            { text: "Open and close a <table>...</table> tag", check: (c) => /<table>[\s\S]*<\/table>/i.test(c) },
-            { text: "Include header cells <th> inside a table row <tr>", check: (c) => /<tr>[\s\S]*<th>.+<\/th>[\s\S]*<\/tr>/is.test(c) },
-            { text: "Include data cells <td> inside another table row <tr>", check: (c) => /<tr>[\s\S]*<td>.+<\/td>[\s\S]*<\/tr>/is.test(c) }
-        ],
-        hint: "<table>\n  <tr><th>Rank</th><th>Friend</th></tr>\n  <tr><td>#1</td><td>Sparkle</td></tr>\n</table>"
-    },
-
-    // CHAPTER 3: FORMS
-    {
-        id: 15,
-        chapter: "3. Forms",
-        name: "The Magic Mailbox",
-        speech: "Time to talk to our visitors! Forms create magical mailboxes where people can type messages.",
-        desc: "A webpage shouldn't just be something you read; it should be something you can play with! \n\nThe `<form>` tag creates a secure zone for collecting answers. Inside it, we use `<input>` tags to draw empty white boxes where visitors can type their names, passwords, or search queries.",
-        starter: "<h2>Search the Web</h2>\n",
-        tasks: [
-            { text: "Create a <form>...</form> container", check: (c) => /<form>[\s\S]*<\/form>/i.test(c) },
-            { text: "Add an <input type=\"text\"> inside", check: (c) => /<form>[\s\S]*<input\s+[^>]*type=["']text["']/is.test(c) },
-            { text: "Give the input a placeholder attribute", check: (c) => /<input\s+[^>]*placeholder=["'][^"']+["']/i.test(c) }
-        ],
-        hint: '<form>\n  <input type="text" placeholder="Search the galaxy...">\n</form>'
-    },
-    {
-        id: 16,
-        chapter: "3. Forms",
-        name: "The Name Tag",
-        speech: "Every mailbox needs a <label> so people (and computers) know what kind of mail goes inside!",
-        desc: "If you just put five blank text boxes on a screen, nobody would know where to type their name and where to type their email! \n\nA `<label>` acts as a sticky note next to the box. We use the `for=\"...\"` attribute to magically connect the label directly to the `id` of the input box.",
-        starter: "<h3>Account Sign Up</h3>\n<form>\n</form>\n",
-        tasks: [
-            { text: "Include an <input type=\"email\">", check: (c) => /<input\s+[^>]*type=["']email["']/i.test(c) },
-            { text: "Include an <input type=\"password\">", check: (c) => /<input\s+[^>]*type=["']password["']/i.test(c) },
-            { text: "Use at least two <label> elements", check: (c) => (c.match(/<label/gi) || []).length >= 2 }
-        ],
-        hint: '<label for="em">Email:</label><input id="em" type="email">\n<label for="pw">Password:</label><input id="pw" type="password">'
-    },
-    {
-        id: 17,
-        chapter: "3. Forms",
-        name: "Choose Your Adventure",
-        speech: "Checkboxes are for grabbing lots of snacks, but Radio buttons mean you can only pick ONE!",
-        desc: "Sometimes we don't want visitors to type; we just want them to click! \n\n`<input type=\"checkbox\">` creates square boxes where users can check off as many items as they want (like choosing toppings on a pizza). But `<input type=\"radio\">` creates little circles where picking a new option magically un-selects the old one!",
-        starter: "<form>\n  <p>Select your tier:</p>\n</form>\n",
-        tasks: [
-            { text: "Add at least one <input type=\"checkbox\">", check: (c) => /<input\s+[^>]*type=["']checkbox["']/i.test(c) },
-            { text: "Add two <input type=\"radio\"> with the same name attribute", check: (c) => (c.match(/type=["']radio["']/gi) || []).length >= 2 && /name=["']\w+["']/i.test(c) }
-        ],
-        hint: '<input type="radio" name="tier"> Starter\n<input type="radio" name="tier"> Pro\n<input type="checkbox"> Agree to rules'
-    },
-    {
-        id: 18,
-        chapter: "3. Forms",
-        name: "The Hidden Scroll",
-        speech: "Dropdown menus keep forms neat by hiding long lists until someone clicks on them!",
-        desc: "If you have 50 different countries for someone to pick from, listing them all with radio buttons would make your webpage 100 pages long! \n\nThe `<select>` tag creates a little dropdown drawer, and the `<option>` tags are the folded up papers inside it. It saves tons of space!",
-        starter: "<h3>Birthday Party RSVP</h3>\n<form>\n  <label>Will you attend?</label>\n</form>\n",
-        tasks: [
-            { text: "Create a <select>...</select> dropdown", check: (c) => /<select>[\s\S]*<\/select>/i.test(c) },
-            { text: "Add at least three <option> tags inside the select", check: (c) => (c.match(/<option/gi) || []).length >= 3 }
-        ],
-        hint: '<select><option>Yes</option><option>No</option><option>Maybe</option></select>'
-    },
-    {
-        id: 19,
-        chapter: "3. Forms",
-        name: "The Giant Canvas",
-        speech: "When someone wants to write a long letter, a regular input box is too tiny. We use <textarea>!",
-        desc: "A regular `<input type=\"text\">` is only meant for short things like names or phone numbers. If a user tries to type a whole story in one, it gets really frustrating.\n\nThe `<textarea>` tag gives them a giant, stretchy canvas where they can press 'Enter', make paragraphs, and tell you a whole story!",
-        starter: "<h3>Feedback Form</h3>\n<form>\n</form>\n",
-        tasks: [
-            { text: "Add a <textarea>...</textarea> tag", check: (c) => /<textarea[\s\S]*<\/textarea>/i.test(c) },
-            { text: "Specify rows and cols attributes on the textarea", check: (c) => /rows=["']\d+["']/i.test(c) && /cols=["']\d+["']/i.test(c) }
-        ],
-        hint: '<textarea rows="4" cols="30" placeholder="Type your letter here..."></textarea>'
-    },
-    {
-        id: 20,
-        chapter: "3. Forms",
-        name: "The Delivery Owl",
-        speech: "Finish the form with a Submit button so the answers can fly across the internet!",
-        desc: "A form full of answers is useless if it just sits on the screen. We need a way to send it to the server!\n\nAdding a `<button type=\"submit\">` creates a magic launcher. When the user clicks it, the browser gathers up all the inputs, packs them into a digital envelope, and shoots them across the internet like a delivery owl.",
-        starter: "<h3>Restaurant Review</h3>\n<form>\n</form>\n",
-        tasks: [
-            { text: "Contain an <input> inside the form", check: (c) => /<form>[\s\S]*<input[^>]*>[\s\S]*<\/form>/is.test(c) },
-            { text: "Contain a <select> dropdown inside", check: (c) => /<form>[\s\S]*<select>[\s\S]*<\/select>[\s\S]*<\/form>/is.test(c) },
-            { text: "Include a <button type=\"submit\">Submit</button>", check: (c) => /<button\s+[^>]*type=["']submit["'].*>.*<\/button>/is.test(c) }
-        ],
-        hint: '<form>\n  <input type="text">\n  <select><option>5 Stars</option></select>\n  <button type="submit">Submit Review</button>\n</form>'
-    },
-
-    // CHAPTER 4: SEMANTIC HTML
-    {
-        id: 21,
-        chapter: "4. Semantic HTML",
-        name: "The Magic Sandwich",
-        speech: "Semantic tags give true human meaning to the webpage layout: Header, Main, and Footer!",
-        desc: "In the old days, people just used 100 `<div>` boxes for everything. But blind screen-readers and Google search robots got super confused looking at boxes!\n\nNow, we make a Semantic Sandwich: The `<header>` is the top bun containing the logo. The `<main>` is the yummy meat in the middle holding the story. The `<footer>` is the bottom bun with the copyright.",
+        id: 3, chapter: "1. Words", name: "Lines & Jumps",
+        speech: "Let's draw a line and jump down!",
+        desc: "<hr> draws a line.\n<br> makes words jump down.",
         starter: "",
         tasks: [
-            { text: "Add a <header> with an <h1> title inside", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<\/header>/is.test(c) },
-            { text: "Add a <main> with a <p> article body inside", check: (c) => /<main>[\s\S]*<p>.+<\/p>[\s\S]*<\/main>/is.test(c) },
-            { text: "Add a <footer> with copyright text inside", check: (c) => /<footer>[\s\S]*.+[\s\S]*<\/footer>/is.test(c) }
+            { text: "Make two <p> sentences", check: (c) => (c.match(/<p>/gi) || []).length >= 2 },
+            { text: "Use <br> to jump", check: (c) => /<br\s*\/?>/i.test(c) },
+            { text: "Use <hr> to draw a line", check: (c) => /<hr\s*\/?>/i.test(c) }
         ],
-        hint: "<header><h1>My Daily Log</h1></header>\n<main><p>Today I wrote code!</p></main>\n<footer><p>&copy; 2026 Afifa</p></footer>"
+        hint: "<p>Good morning!</p>\n<hr>\n<p>Hello<br>World!</p>"
     },
     {
-        id: 22,
-        chapter: "4. Semantic HTML",
-        name: "The Treasure Map",
-        speech: "Navigation bars are like treasure maps, helping visitors travel safely around your website!",
-        desc: "If you have a website with 50 pages, visitors will get lost instantly! \n\nWe fix this by creating a `<nav>` (Navigation) block. By placing a list of links inside a `<nav>` tag, we are officially declaring to the computer: 'Hey! These aren't just random links, this is the main steering wheel for the whole website!'",
-        starter: "<header>\n  <h1>Adventure Land</h1>\n</header>\n",
-        tasks: [
-            { text: "Place a <nav>...</nav> tag inside <header>", check: (c) => /<header>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
-            { text: "Include at least two <a> links inside the nav", check: (c) => /<nav>[\s\S]*<a\s+[^>]*>.+<\/a>[\s\S]*<a\s+[^>]*>.+<\/a>[\s\S]*<\/nav>/is.test(c) }
-        ],
-        hint: '<nav>\n  <ul>\n    <li><a href="#">Home</a></li>\n    <li><a href="#">About</a></li>\n  </ul>\n</nav>'
-    },
-    {
-        id: 23,
-        chapter: "4. Semantic HTML",
-        name: "Rooms in the Castle",
-        speech: "Divide your big pages into organized, tidy rooms using the semantic <section> tag!",
-        desc: "Imagine a house without walls. The kitchen, bedroom, and bathroom would all be mixed together! \n\nWhen a webpage gets really long, we use the `<section>` tag to build walls. Each section groups a specific topic together, and every single section should have its very own `<h2>` heading so visitors know which room they just walked into.",
-        starter: "<main>\n</main>\n",
-        tasks: [
-            { text: "Include at least two <section>...</section> elements", check: (c) => (c.match(/<section>/gi) || []).length >= 2 },
-            { text: "Each section must have its own <h2> heading", check: (c) => (c.match(/<section>[\s\S]*?<h2>.*?<\/h2>[\s\S]*?<\/section>/gi) || []).length >= 2 }
-        ],
-        hint: "<main>\n  <section><h2>Hobbies</h2><p>Coding and games.</p></section>\n  <section><h2>Goals</h2><p>Make cool apps.</p></section>\n</main>"
-    },
-    {
-        id: 24,
-        chapter: "4. Semantic HTML",
-        name: "The Message in a Bottle",
-        speech: "Articles represent self-contained stories that make sense all on their own!",
-        desc: "A `<section>` is just a room in a house, but an `<article>` is like a message in a bottle. \n\nIf you threw an `<article>` into the ocean and someone found it on a completely different website, it would still make perfect sense! We use articles for blog posts, news stories, and forum comments because they are complete, independent thoughts.",
-        starter: "<main>\n</main>\n",
-        tasks: [
-            { text: "Add an <article>...</article> tag inside main", check: (c) => /<main>[\s\S]*<article>[\s\S]*<\/article>[\s\S]*<\/main>/is.test(c) },
-            { text: "Include an <h2> heading and a <p> inside the article", check: (c) => /<article>[\s\S]*<h2>.+<\/h2>[\s\S]*<p>.+<\/p>[\s\S]*<\/article>/is.test(c) }
-        ],
-        hint: "<article>\n  <h2>A Wonderful Sunday</h2>\n  <p>We built fun websites together!</p>\n</article>"
-    },
-    {
-        id: 25,
-        chapter: "4. Semantic HTML",
-        name: "The Golden Frame",
-        speech: "Photos in articles look best with a golden frame and a brass nameplate using <figure>!",
-        desc: "If you just drop an `<img>` tag into an article, it's just a loose photo sitting on the desk. \n\nWrapping the image inside a `<figure>` acts like a heavy, beautiful wooden frame. Then, adding a `<figcaption>` right under the image acts as a little brass nameplate explaining exactly what the picture is showing!",
+        id: 4, chapter: "1. Words", name: "Cool Words",
+        speech: "Let's make words look super cool!",
+        desc: "<strong> makes words thick.\n<em> makes words slanted.",
         starter: "",
         tasks: [
-            { text: "Create a <figure>...</figure> element", check: (c) => /<figure>[\s\S]*<\/figure>/is.test(c) },
-            { text: "Place an <img> tag inside the figure", check: (c) => /<figure>[\s\S]*<img\s+[^>]*>[\s\S]*<\/figure>/is.test(c) },
-            { text: "Add a <figcaption> explaining the picture", check: (c) => /<figure>[\s\S]*<figcaption>.+<\/figcaption>[\s\S]*<\/figure>/is.test(c) }
+            { text: "Put a word inside <strong>...</strong>", check: (c) => /<strong>.+<\/strong>/is.test(c) },
+            { text: "Put a word inside <em>...</em>", check: (c) => /<em>.+<\/em>/is.test(c) }
         ],
-        hint: '<figure>\n  <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200" alt="Cat">\n  <figcaption>A cozy resting kitten.</figcaption>\n</figure>'
+        hint: "<p>Coding is <strong>super</strong> and <em>fun</em>!</p>"
     },
     {
-        id: 26,
-        chapter: "4. Semantic HTML",
-        name: "The Grand Masterpiece",
-        speech: "YOU MADE IT TO THE SUMMIT! Now assemble everything into your very own Master Webpage!",
-        desc: "Afifa, you have collected all the magical HTML building blocks. You know how to build foundations, draw boxes, collect mail, and lay out articles.\n\nFor your final Capstone Challenge, you must combine everything. Build a complete webpage featuring a `<header>`, a `<nav>` map, a `<main>` body with an `<article>`, a `<form>` to write to you, and a `<footer>`! Sparkle is cheering you on!",
-        starter: "<!DOCTYPE html>\n<html>\n<head><title>Afifa's Showcase</title></head>\n<body>\n\n</body>\n</html>",
+        id: 5, chapter: "1. Words", name: "Making Lists",
+        speech: "Let's make a list!",
+        desc: "<ul> makes a list with dots.\n<ol> makes a list with numbers.\nUse <li> for the items!",
+        starter: "",
         tasks: [
-            { text: "Include <header> with <h1> and a <nav>", check: (c) => /<header>[\s\S]*<h1>.+<\/h1>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
-            { text: "Include <main> with at least one <article>", check: (c) => /<main>[\s\S]*<article>[\s\S]*<\/article>[\s\S]*<\/main>/is.test(c) },
-            { text: "Include a <form> containing a <button>", check: (c) => /<form>[\s\S]*<button.*>.*<\/button>[\s\S]*<\/form>/is.test(c) },
-            { text: "Include a <footer> at the bottom", check: (c) => /<footer>[\s\S]*<\/footer>/is.test(c) }
+            { text: "Make a <ul> list with two <li> items", check: (c) => /<ul>\s*(<li>.*?<\/li>\s*){2,}<\/ul>/is.test(c) },
+            { text: "Make an <ol> list with two <li> items", check: (c) => /<ol>\s*(<li>.*?<\/li>\s*){2,}<\/ol>/is.test(c) }
         ],
-        hint: "Combine the pieces from previous chapters inside the <body> tag to build your grand portfolio page!"
+        hint: "<ul>\n<li>Sugar</li>\n<li>Flour</li>\n</ul>\n<ol>\n<li>Mix</li>\n<li>Bake</li>\n</ol>"
+    },
+    {
+        id: 6, chapter: "1. Words", name: "Pictures",
+        speech: "Let's put a cute puppy on our page!",
+        desc: "The <img> tag shows a picture.",
+        starter: "",
+        tasks: [
+            { text: "Use an <img> tag", check: (c) => /<img\s+[^>]*>/i.test(c) },
+            { text: "Add a src link", check: (c) => /<img\s+[^>]*src=["'][^"']+["']/i.test(c) }
+        ],
+        hint: '<img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=200">'
+    },
+    {
+        id: 7, chapter: "1. Words", name: "Links",
+        speech: "Links are like magic doors!",
+        desc: "The <a> tag makes a link you can click.",
+        starter: "",
+        tasks: [
+            { text: "Use an <a> tag", check: (c) => /<a\s+[^>]*>.+<\/a>/is.test(c) },
+            { text: "Add an href link", check: (c) => /<a\s+[^>]*href=["']https?:\/\/[^"']+["']/i.test(c) }
+        ],
+        hint: '<a href="https://wikipedia.org">Click Here</a>'
+    },
+    {
+        id: 8, chapter: "2. Boxes", name: "The House",
+        speech: "A webpage is built like a house!",
+        desc: "<html> is the whole house.\n<body> is the room where we see things.",
+        starter: "",
+        tasks: [
+            { text: "Make an <html> box", check: (c) => /<html>[\s\S]*<\/html>/i.test(c) },
+            { text: "Put a <body> inside", check: (c) => /<body>[\s\S]*.+[\s\S]*<\/body>/i.test(c) }
+        ],
+        hint: "<html>\n<body>\n<p>Hi!</p>\n</body>\n</html>"
+    },
+    {
+        id: 9, chapter: "2. Boxes", name: "Toys in Boxes",
+        speech: "Put tags inside other tags!",
+        desc: "Just like putting a toy in a box.",
+        starter: "",
+        tasks: [
+            { text: "Put a <strong> inside a <p>", check: (c) => /<p>.*<strong>.*<\/strong>.*<\/p>/is.test(c) },
+            { text: "Put a <span> inside the <strong>", check: (c) => /<strong>.*<span>.*<\/span>.*<\/strong>/is.test(c) }
+        ],
+        hint: "<p>The toy is <strong><span>hidden</span></strong>.</p>"
+    },
+    {
+        id: 10, chapter: "2. Boxes", name: "The Group Box",
+        speech: "The <div> tag groups things together!",
+        desc: "Use <div> to put things in an invisible box.",
+        starter: "",
+        tasks: [
+            { text: "Make a <div> box", check: (c) => /<div>[\s\S]*<\/div>/i.test(c) },
+            { text: "Put an <h2> title inside", check: (c) => /<div>[\s\S]*<h2>.+<\/h2>[\s\S]*<\/div>/is.test(c) },
+            { text: "Put a <p> sentence inside", check: (c) => /<div>[\s\S]*<p>.+<\/p>[\s\S]*<\/div>/is.test(c) }
+        ],
+        hint: "<div>\n<h2>Bike</h2>\n<p>Fast</p>\n</div>"
+    },
+    {
+        id: 11, chapter: "2. Boxes", name: "Tiny Wrapper",
+        speech: "A <span> is a tiny wrapper for one word!",
+        desc: "Wrap one word in a <span> to color it.",
+        starter: "",
+        tasks: [
+            { text: "Put a <span> around a word", check: (c) => /<p>.*<span>.+<\/span>.*<\/p>/is.test(c) },
+            { text: "Add a color style", check: (c) => /<span\s+style=["'][^"']+["']>/i.test(c) }
+        ],
+        hint: '<p>The <span style="color: purple;">fox</span> is clever.</p>'
+    },
+    {
+        id: 12, chapter: "2. Boxes", name: "Team Shirts",
+        speech: "Classes are like team shirts!",
+        desc: "Give tags the same class name.",
+        starter: "",
+        tasks: [
+            { text: 'Give the first <p> class="blue"', check: (c) => /<p\s+[^>]*class=["']blue["']/i.test(c) },
+            { text: 'Give the second <p> class="blue"', check: (c) => (c.match(/class=["']blue["']/gi) || []).length >= 2 }
+        ],
+        hint: '<p class="blue">Story one.</p>\n<p class="blue">Story two.</p>'
+    },
+    {
+        id: 13, chapter: "2. Boxes", name: "Secret Names",
+        speech: "An ID is a secret name for just one tag!",
+        desc: "Give a special tag its very own ID.",
+        starter: "",
+        tasks: [
+            { text: 'Make a div with id="red"', check: (c) => /<div\s+[^>]*id=["']red["']/i.test(c) },
+            { text: 'Make a div with id="blue"', check: (c) => /<div\s+[^>]*id=["']blue["']/i.test(c) }
+        ],
+        hint: '<div id="red">Red Box</div>\n<div id="blue">Blue Box</div>'
+    },
+    {
+        id: 14, chapter: "2. Boxes", name: "Grids",
+        speech: "Tables make a neat grid!",
+        desc: "<table> is the grid.\n<tr> is a row.\n<td> is a box for words.",
+        starter: "",
+        tasks: [
+            { text: "Make a <table>", check: (c) => /<table>[\s\S]*<\/table>/i.test(c) },
+            { text: "Add a row <tr>", check: (c) => /<tr>[\s\S]*<\/tr>/is.test(c) },
+            { text: "Add a box <td> inside the row", check: (c) => /<tr>[\s\S]*<td>.+<\/td>[\s\S]*<\/tr>/is.test(c) }
+        ],
+        hint: "<table>\n<tr>\n<td>Sparkle</td>\n</tr>\n</table>"
+    },
+    {
+        id: 15, chapter: "3. Forms", name: "Typing Boxes",
+        speech: "Let people type on your page!",
+        desc: "<form> holds questions.\n<input> is a blank box to type in.",
+        starter: "",
+        tasks: [
+            { text: "Make a <form>", check: (c) => /<form>[\s\S]*<\/form>/i.test(c) },
+            { text: "Put an <input> inside", check: (c) => /<form>[\s\S]*<input/is.test(c) }
+        ],
+        hint: "<form>\n<input>\n</form>"
+    },
+    {
+        id: 16, chapter: "3. Forms", name: "Name Tags",
+        speech: "Labels tell us what to type!",
+        desc: "A <label> is a sticky note for the box.",
+        starter: "",
+        tasks: [
+            { text: "Add an <input>", check: (c) => /<input/i.test(c) },
+            { text: "Add a <label>", check: (c) => /<label/i.test(c) }
+        ],
+        hint: "<form>\n<label>Name:</label>\n<input>\n</form>"
+    },
+    {
+        id: 17, chapter: "3. Forms", name: "Pick a Toy",
+        speech: "Radio buttons let you pick just one!",
+        desc: "Use radio buttons to choose one thing.",
+        starter: "",
+        tasks: [
+            { text: "Add a checkbox", check: (c) => /type=["']checkbox["']/i.test(c) },
+            { text: "Add two radio buttons", check: (c) => (c.match(/type=["']radio["']/gi) || []).length >= 2 }
+        ],
+        hint: '<form>\n<input type="radio" name="toy"> Doll\n<input type="radio" name="toy"> Car\n<input type="checkbox"> Gift wrap\n</form>'
+    },
+    {
+        id: 18, chapter: "3. Forms", name: "Hidden List",
+        speech: "A dropdown hides a long list!",
+        desc: "<select> makes a drawer.\n<option> are the things inside!",
+        starter: "",
+        tasks: [
+            { text: "Make a <select>", check: (c) => /<select>[\s\S]*<\/select>/i.test(c) },
+            { text: "Put three <option> tags inside", check: (c) => (c.match(/<option/gi) || []).length >= 3 }
+        ],
+        hint: "<form>\n<select>\n<option>Yes</option>\n<option>No</option>\n<option>Maybe</option>\n</select>\n</form>"
+    },
+    {
+        id: 19, chapter: "3. Forms", name: "Big Box",
+        speech: "Write a long story!",
+        desc: "A <textarea> is a giant box to write a letter.",
+        starter: "",
+        tasks: [
+            { text: "Add a <textarea>", check: (c) => /<textarea[\s\S]*<\/textarea>/i.test(c) }
+        ],
+        hint: "<form>\n<textarea></textarea>\n</form>"
+    },
+    {
+        id: 20, chapter: "3. Forms", name: "Send It!",
+        speech: "Add a button to send the answers!",
+        desc: "A <button> sends your answers away.",
+        starter: "",
+        tasks: [
+            { text: "Add an <input>", check: (c) => /<input/i.test(c) },
+            { text: "Add a <button>", check: (c) => /<button.*>.*<\/button>/is.test(c) }
+        ],
+        hint: "<form>\n<input>\n<button>Send</button>\n</form>"
+    },
+    {
+        id: 21, chapter: "4. Pages", name: "The Sandwich",
+        speech: "Let's build a website sandwich!",
+        desc: "<header> is the top bun.\n<main> is the middle.\n<footer> is the bottom bun.",
+        starter: "",
+        tasks: [
+            { text: "Add a <header>", check: (c) => /<header>[\s\S]*<\/header>/is.test(c) },
+            { text: "Add a <main>", check: (c) => /<main>[\s\S]*<\/main>/is.test(c) },
+            { text: "Add a <footer>", check: (c) => /<footer>[\s\S]*<\/footer>/is.test(c) }
+        ],
+        hint: "<header><h1>Hi</h1></header>\n<main><p>Fun!</p></main>\n<footer><p>Bye</p></footer>"
+    },
+    {
+        id: 22, chapter: "4. Pages", name: "The Map",
+        speech: "A nav bar is a map for your website!",
+        desc: "<nav> holds links so visitors do not get lost.",
+        starter: "",
+        tasks: [
+            { text: "Put a <nav> inside the header", check: (c) => /<header>[\s\S]*<nav>[\s\S]*<\/nav>[\s\S]*<\/header>/is.test(c) },
+            { text: "Add <a> links inside", check: (c) => /<nav>[\s\S]*<a/is.test(c) }
+        ],
+        hint: '<header>\n<nav>\n<a href="#">Home</a>\n<a href="#">Games</a>\n</nav>\n</header>'
+    },
+    {
+        id: 23, chapter: "4. Pages", name: "Rooms",
+        speech: "Sections are like rooms in a house!",
+        desc: "Use <section> to divide a page into rooms.",
+        starter: "",
+        tasks: [
+            { text: "Make two <section> tags", check: (c) => (c.match(/<section>/gi) || []).length >= 2 },
+            { text: "Give each section an <h2> title", check: (c) => (c.match(/<h2>/gi) || []).length >= 2 }
+        ],
+        hint: "<main>\n<section><h2>Room 1</h2></section>\n<section><h2>Room 2</h2></section>\n</main>"
+    },
+    {
+        id: 24, chapter: "4. Pages", name: "A Story",
+        speech: "Articles are full stories!",
+        desc: "An <article> is a story that makes sense by itself.",
+        starter: "",
+        tasks: [
+            { text: "Add an <article>", check: (c) => /<article>[\s\S]*<\/article>/is.test(c) }
+        ],
+        hint: "<main>\n<article>\n<h2>My Day</h2>\n<p>It was fun!</p>\n</article>\n</main>"
+    },
+    {
+        id: 25, chapter: "4. Pages", name: "Photo Frame",
+        speech: "Put your pictures in a nice frame!",
+        desc: "<figure> is a frame for your picture.",
+        starter: "",
+        tasks: [
+            { text: "Make a <figure>", check: (c) => /<figure>[\s\S]*<\/figure>/is.test(c) },
+            { text: "Put an <img> inside", check: (c) => /<figure>[\s\S]*<img/is.test(c) }
+        ],
+        hint: '<figure>\n<img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200">\n</figure>'
+    },
+    {
+        id: 26, chapter: "4. Pages", name: "Masterpiece",
+        speech: "You are a Master Builder!",
+        desc: "Afifa, put everything together! Use a header, a main body, and a footer.",
+        starter: "",
+        tasks: [
+            { text: "Include a <header>", check: (c) => /<header>[\s\S]*<\/header>/is.test(c) },
+            { text: "Include a <main>", check: (c) => /<main>[\s\S]*<\/main>/is.test(c) },
+            { text: "Include a <footer>", check: (c) => /<footer>[\s\S]*<\/footer>/is.test(c) }
+        ],
+        hint: "<html>\n<body>\n<header><h1>Hi</h1></header>\n<main><p>My Code</p></main>\n<footer>Bye</footer>\n</body>\n</html>"
     }
 ];
 
-// State & Persistent Storage Engine
-let state = {
-    currentIndex: 0,
-    unlockedIndex: 0,
-    userCode: {},
-    xp: 0
-};
+let state = { currentIndex: 0, unlockedIndex: 0, userCode: {}, xp: 0 };
 
-// Load saved progress from browser localStorage
 function initStorage() {
-    const saved = localStorage.getItem('afifa_quest_v2');
+    const saved = localStorage.getItem('afifa_quest_v5');
     if (saved) {
-        try {
-            state = JSON.parse(saved);
-        } catch (e) {
-            console.error("Storage parse error", e);
-        }
+        try { state = JSON.parse(saved); } catch (e) {}
     }
 }
 
 function persistState() {
-    localStorage.setItem('afifa_quest_v2', JSON.stringify(state));
+    localStorage.setItem('afifa_quest_v5', JSON.stringify(state));
 }
 
-// Elements
 const chapterListEl = document.getElementById('chapter-list');
 const userEditorEl = document.getElementById('user-editor');
 const previewFrame = document.getElementById('preview-sandbox');
@@ -1015,7 +705,6 @@ const statLevelEl = document.getElementById('stat-level');
 const statXpEl = document.getElementById('stat-xp');
 const toastEl = document.getElementById('toast');
 
-// Sound Synthesizer (Kid-Friendly Audio Feedback via Web Audio API)
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playTone(freq, type = 'sine', duration = 0.2) {
@@ -1026,10 +715,8 @@ function playTone(freq, type = 'sine', duration = 0.2) {
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
     gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + duration);
 }
 
 function playSuccessFanfare() {
@@ -1037,12 +724,8 @@ function playSuccessFanfare() {
         setTimeout(() => playTone(f, 'triangle', 0.3), idx * 110);
     });
 }
+function playErrorBloop() { playTone(220, 'sawtooth', 0.25); }
 
-function playErrorBloop() {
-    playTone(220, 'sawtooth', 0.25);
-}
-
-// Render Sidebar Navigation
 function renderSidebar() {
     chapterListEl.innerHTML = '';
     const chapters = {};
@@ -1070,35 +753,30 @@ function renderSidebar() {
             row.className = `exercise-item ${isCurrent ? 'active' : ''} ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
             row.innerHTML = `
                 <div class="badge">${isCompleted ? '✓' : (item.idx + 1)}</div>
-                <span>Ex ${item.id}: ${item.name}</span>
+                <span>${item.name}</span>
             `;
 
-            if (!isLocked) {
-                row.onclick = () => selectExercise(item.idx);
-            }
+            if (!isLocked) row.onclick = () => selectExercise(item.idx);
             group.appendChild(row);
         });
 
         chapterListEl.appendChild(group);
     }
-
     statLevelEl.innerText = state.currentIndex + 1;
     statXpEl.innerText = state.xp;
 }
 
-// Select & Load an Exercise
 function selectExercise(idx) {
     state.currentIndex = idx;
     const cur = COURSE[idx];
 
-    currentTitleEl.innerText = `${cur.chapter} • Exercise ${cur.id}: ${cur.name}`;
+    currentTitleEl.innerText = `${cur.chapter} • ${cur.name}`;
     sparkleSayEl.innerText = cur.speech;
-    missionHeadlineEl.innerText = `Exercise ${cur.id}: ${cur.name}`;
+    missionHeadlineEl.innerText = cur.name;
     missionTextEl.innerText = cur.desc;
     hintBoxEl.style.display = 'none';
     hintBoxEl.innerText = cur.hint;
 
-    // Load saved code or default starter
     const savedCode = state.userCode[idx] !== undefined ? state.userCode[idx] : cur.starter;
     userEditorEl.value = savedCode;
 
@@ -1108,7 +786,6 @@ function selectExercise(idx) {
     persistState();
 }
 
-// Check Tasks Status Real-Time
 function updateChecklist() {
     const cur = COURSE[state.currentIndex];
     const code = userEditorEl.value;
@@ -1126,13 +803,10 @@ function updateChecklist() {
     });
 }
 
-// Real-time Preview Engine
 function updateLivePreview() {
     const code = userEditorEl.value;
     const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-    doc.open();
-    doc.write(code);
-    doc.close();
+    doc.open(); doc.write(code); doc.close();
 }
 
 userEditorEl.addEventListener('input', () => {
@@ -1142,7 +816,6 @@ userEditorEl.addEventListener('input', () => {
     persistState();
 });
 
-// Run Code & Validation Check
 function evaluateCode() {
     const cur = COURSE[state.currentIndex];
     const code = userEditorEl.value;
@@ -1158,9 +831,7 @@ function evaluateCode() {
     if (failedTask) {
         playErrorBloop();
         showToast(`Keep going! You still need to: ${failedTask.text}`);
-        sparkleSayEl.innerText = `Don't worry, Afifa! Check the checklist on the left and give it another try! 🌟`;
     } else {
-        // Passed Level
         playSuccessFanfare();
         fireConfettiCannon();
 
@@ -1171,11 +842,7 @@ function evaluateCode() {
 
         persistState();
         renderSidebar();
-
-        const celebrationScreen = document.getElementById('celebration-screen');
-        const celebrationMsg = document.getElementById('celebration-msg');
-        celebrationMsg.innerText = `You conquered Exercise ${cur.id}: ${cur.name}! Sparkle is dancing with joy!`;
-        celebrationScreen.style.display = 'flex';
+        document.getElementById('celebration-screen').style.display = 'flex';
     }
 }
 
@@ -1184,7 +851,7 @@ function advanceLevel() {
     if (state.currentIndex < COURSE.length - 1) {
         selectExercise(state.currentIndex + 1);
     } else {
-        alert("🎉 INCREDIBLE MILESTONE! Afifa has completed the entire HTML Academy! You are officially ready for CSS styling!");
+        alert("🎉 YOU WON THE WHOLE GAME!");
     }
 }
 
@@ -1193,7 +860,7 @@ function toggleHint() {
 }
 
 function resetEditor() {
-    if (confirm("Reset code back to the starting template?")) {
+    if (confirm("Erase and start over?")) {
         userEditorEl.value = COURSE[state.currentIndex].starter;
         state.userCode[state.currentIndex] = userEditorEl.value;
         updateLivePreview();
@@ -1208,7 +875,6 @@ function showToast(msg) {
     setTimeout(() => { toastEl.style.display = 'none'; }, 4000);
 }
 
-// Confetti Cannon
 function fireConfettiCannon() {
     const count = 200;
     const defaults = { origin: { y: 0.7 } };
@@ -1226,7 +892,6 @@ function fireConfettiCannon() {
     fire(0.1, { spread: 120, startVelocity: 45 });
 }
 
-// Initialize Application
 initStorage();
 selectExercise(state.currentIndex);
 </script>
